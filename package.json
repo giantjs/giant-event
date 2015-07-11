@@ -1,6 +1,6 @@
 {
-    "name"           : "evan",
-    "version"        : "0.8.0",
+    "name"           : "giant-event",
+    "version"        : "0.0.3",
     "description"    : "Universal events",
     "keywords"       : [
         "custom",
@@ -13,7 +13,7 @@
     "license"        : "MIT",
     "repository"     : {
         "type": "git",
-        "url" : "https://github.com/danstocker/evan.git"
+        "url" : "git@github.com:giantjs/giant-event.git"
     },
     "dependencies"   : {
         "dessert": "~0.3.2",
