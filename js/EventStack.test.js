@@ -1,19 +1,19 @@
-/*global sntls, evan, Event, module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, raises */
+/*global giant, giant, Event, module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, raises */
 (function () {
     "use strict";
 
     module("EventStack");
 
     test("Instantiation", function () {
-        var eventStack = evan.EventStack.create();
+        var eventStack = giant.EventStack.create();
 
-        ok(eventStack.events.isA(evan.OpenChain), "should add events property");
+        ok(eventStack.events.isA(giant.OpenChain), "should add events property");
     });
 
     test("Pushing event", function () {
         expect(3);
 
-        var eventStack = evan.EventStack.create(),
+        var eventStack = giant.EventStack.create(),
             event = {},
             link;
 
@@ -25,12 +25,12 @@
 
         link = eventStack.pushEvent(event);
 
-        ok(link.isA(evan.ValueLink), "should return ValueLink instance");
+        ok(link.isA(giant.ValueLink), "should return ValueLink instance");
         strictEqual(link.value, event, "should set event as link value");
     });
 
     test("First event getter", function () {
-        var eventStack = evan.EventStack.create(),
+        var eventStack = giant.EventStack.create(),
             event = {};
 
         eventStack.pushEvent({});
@@ -40,7 +40,7 @@
     });
 
     test("Unordered pop", function () {
-        var eventStack = evan.EventStack.create(),
+        var eventStack = giant.EventStack.create(),
             link1 = eventStack.pushEvent(1), // will be sync
             link2 = eventStack.pushEvent(2), // will be async
             link3 = eventStack.pushEvent(3); // will be sync

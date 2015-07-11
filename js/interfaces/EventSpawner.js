@@ -1,14 +1,14 @@
 /**
- * Interface that marks a class as an event spawner. Event spawners create and prepare instances of evan.Event.
- * @name evan.EventSpawner
+ * Interface that marks a class as an event spawner. Event spawners create and prepare instances of giant.Event.
+ * @name giant.EventSpawner
  * @class
- * @extends troop.Base
+ * @extends giant.Base
  */
 
 /**
  * Creates and prepares and event with the specified name.
- * @name evan.EventSpawner#spawnEvent
+ * @name giant.EventSpawner#spawnEvent
  * @function
  * @param {string} eventName
- * @returns {evan.Event}
+ * @returns {giant.Event}
  */

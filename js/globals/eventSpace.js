@@ -1,10 +1,10 @@
-/*global troop, evan */
-troop.postpone(evan, 'eventSpace', function () {
+/*global giant, giant */
+giant.postpone(giant, 'eventSpace', function () {
     "use strict";
 
     /**
      * Global, shared event space.
-     * @type {evan.EventSpace}
+     * @type {giant.EventSpace}
      */
-    evan.eventSpace = evan.EventSpace.create();
+    giant.eventSpace = giant.EventSpace.create();
 });

@@ -1,23 +1,23 @@
-/*global troop, sntls, evan */
-troop.postpone(evan, 'originalEventStack', function () {
+/*global giant, giant, giant */
+giant.postpone(giant, 'originalEventStack', function () {
     "use strict";
 
     /**
      * Global stack for original events.
      * @type {Array}
      */
-    evan.originalEventStack = evan.EventStack.create();
+    giant.originalEventStack = giant.EventStack.create();
 });
 
-troop.postpone(evan, 'pushOriginalEvent', function () {
+giant.postpone(giant, 'pushOriginalEvent', function () {
     "use strict";
 
     /**
      * Adds an original event to the stack.
-     * @param {evan.Event|*} originalEvent
-     * @returns {evan.ValueLink}
+     * @param {giant.Event|*} originalEvent
+     * @returns {giant.ValueLink}
      */
-    evan.pushOriginalEvent = function (originalEvent) {
-        return evan.originalEventStack.pushEvent(originalEvent);
+    giant.pushOriginalEvent = function (originalEvent) {
+        return giant.originalEventStack.pushEvent(originalEvent);
     };
 });

@@ -1,26 +1,26 @@
-/*global dessert, troop, sntls, evan */
-troop.postpone(evan, 'EventSpace', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'EventSpace', function () {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend();
 
     /**
      * Instantiates an EventSpace.
-     * @name evan.EventSpace.create
+     * @name giant.EventSpace.create
      * @function
-     * @return {evan.EventSpace}
+     * @return {giant.EventSpace}
      */
 
     /**
      * Events traverse within a confined event space.
      * @class
-     * @extends troop.Base
-     * @extends evan.EventSpawner
-     * @extends evan.EventTarget
+     * @extends giant.Base
+     * @extends giant.EventSpawner
+     * @extends giant.EventTarget
      */
-    evan.EventSpace = self
-        .addPrivateMethods(/** @lends evan.EventSpace */{
+    giant.EventSpace = self
+        .addPrivateMethods(/** @lends giant.EventSpace */{
             /**
              * Generates a stub for event handlers. (An empty array)
              * @return {Array}
@@ -32,12 +32,12 @@ troop.postpone(evan, 'EventSpace', function () {
 
             /**
              * Prepares spawned event for triggering.
-             * @param {evan.Event} event
+             * @param {giant.Event} event
              * @private
              */
             _prepareEvent: function (event) {
-                var nextPayloadItems = evan.nextPayloadStore.getPayload(event.eventName),
-                    nextOriginalEvent = evan.originalEventStack.getLastEvent();
+                var nextPayloadItems = giant.nextPayloadStore.getPayload(event.eventName),
+                    nextOriginalEvent = giant.originalEventStack.getLastEvent();
 
                 if (nextPayloadItems) {
                     // applying next payload on spawned event
@@ -50,24 +50,24 @@ troop.postpone(evan, 'EventSpace', function () {
                 }
             }
         })
-        .addMethods(/** @lends evan.EventSpace# */{
+        .addMethods(/** @lends giant.EventSpace# */{
             /** @ignore */
             init: function () {
                 /**
                  * Lookup for subscribed event handlers. Indexed by event name, then event path (stringified), then handler index.
-                 * @type {sntls.Tree}
+                 * @type {giant.Tree}
                  * @constant
                  * TODO: Rename to subscriptionRegistry. Breaking.
                  */
-                this.eventRegistry = sntls.Tree.create();
+                this.eventRegistry = giant.Tree.create();
             },
 
             /**
              * @param {string} eventName
-             * @return {evan.Event}
+             * @return {giant.Event}
              */
             spawnEvent: function (eventName) {
-                var event = evan.Event.create(eventName, this);
+                var event = giant.Event.create(eventName, this);
                 this._prepareEvent(event);
                 return event;
             },
@@ -76,13 +76,13 @@ troop.postpone(evan, 'EventSpace', function () {
              * Subscribes to event.
              * TODO: Switch eventPath / eventName arguments. Breaking.
              * @param {string} eventName Name of event to be triggered.
-             * @param {sntls.Path} eventPath Path we're listening to
+             * @param {giant.Path} eventPath Path we're listening to
              * @param {function} handler Event handler function that is called when the event
              * is triggered on (or bubbles to) the specified path.
-             * @return {evan.EventSpace}
+             * @return {giant.EventSpace}
              */
             subscribeTo: function (eventName, eventPath, handler) {
-                dessert.isFunction(handler, "Invalid event handler function");
+                giant.isFunction(handler, "Invalid event handler function");
 
                 var eventRegistry = this.eventRegistry,
                     eventPathString = eventPath.toString(),
@@ -103,12 +103,12 @@ troop.postpone(evan, 'EventSpace', function () {
              * TODO: Switch eventPath / eventName arguments. Breaking.
              * TODO: Consider changing unsetKey to unsetPath. Measure performance impact.
              * @param {string} [eventName] Name of event to be triggered.
-             * @param {sntls.Path} [eventPath] Path we're listening to
+             * @param {giant.Path} [eventPath] Path we're listening to
              * @param {function} [handler] Event handler function
-             * @return {evan.EventSpace}
+             * @return {giant.EventSpace}
              */
             unsubscribeFrom: function (eventName, eventPath, handler) {
-                dessert.isFunctionOptional(handler, "Invalid event handler function");
+                giant.isFunctionOptional(handler, "Invalid event handler function");
 
                 var eventRegistry = this.eventRegistry,
                     handlers,
@@ -150,7 +150,7 @@ troop.postpone(evan, 'EventSpace', function () {
             /**
              * Subscribes to event and unsubscribes after first trigger.
              * @param {string} eventName Name of event to be triggered.
-             * @param {sntls.Path} eventPath Path we're listening to
+             * @param {giant.Path} eventPath Path we're listening to
              * @param {function} handler Event handler function that is called when the event
              * is triggered on (or bubbles to) the specified path.
              * @return {function} Event handler actually subscribed. Use this for unsubscribing.
@@ -159,7 +159,7 @@ troop.postpone(evan, 'EventSpace', function () {
                 /**
                  * Handler wrapper for events that automatically unsubscribe
                  * after the first trigger.
-                 * @param {evan.Event} event
+                 * @param {giant.Event} event
                  * @param {*} data
                  * @return {*} Whatever the user-defined handler returns (possibly a `false`)
                  */
@@ -179,19 +179,19 @@ troop.postpone(evan, 'EventSpace', function () {
              * Delegates event capturing to a path closer to the root.
              * Handlers subscribed this way CANNOT be unsubscribed individually.
              * @param {string} eventName
-             * @param {sntls.Path} capturePath Path where the event will actually subscribe
-             * @param {sntls.Path} delegatePath Path we're listening to. (Could be derived, eg. Query)
+             * @param {giant.Path} capturePath Path where the event will actually subscribe
+             * @param {giant.Path} delegatePath Path we're listening to. (Could be derived, eg. Query)
              * @param {function} handler Event handler function
              * @return {function} Event handler actually subscribed. Use this for unsubscribing.
              */
             delegateSubscriptionTo: function (eventName, capturePath, delegatePath, handler) {
-                dessert
+                giant
                     .assert(delegatePath.isRelativeTo(capturePath), "Delegate path is not relative to capture path")
                     .isFunction(handler, "Invalid event handler function");
 
                 /**
                  * Handler wrapper for subscribing delegates
-                 * @param {evan.Event} event Event object passed down by the triggering process
+                 * @param {giant.Event} event Event object passed down by the triggering process
                  * @param {*} data Custom event data
                  * @return {*} Whatever the user-defined handler returns (possibly a `false`)
                  */
@@ -217,9 +217,9 @@ troop.postpone(evan, 'EventSpace', function () {
             /**
              * Calls handlers associated with an event name and path.
              * Handlers are assumed to be synchronous.
-             * @param {evan.Event} event
+             * @param {giant.Event} event
              * @return {number|boolean} Number of handlers processed, or false when one handler returned false.
-             * @see evan.Event#triggerSync
+             * @see giant.Event#triggerSync
              */
             callHandlers: function (event) {
                 var handlersPath = [event.currentPath.toString(), event.eventName].toPath(),
@@ -248,8 +248,8 @@ troop.postpone(evan, 'EventSpace', function () {
             /**
              * Retrieves subscribed paths that are relative to the specified path.
              * @param {string} eventName
-             * @param {sntls.Path} path
-             * @return {evan.PathCollection} Collection of paths relative to (not including) `path`
+             * @param {giant.Path} path
+             * @return {giant.PathCollection} Collection of paths relative to (not including) `path`
              * Question is which lib/class should delegate the method.
              */
             getPathsRelativeTo: function (eventName, path) {
@@ -261,16 +261,16 @@ troop.postpone(evan, 'EventSpace', function () {
 
                 if (paths) {
                     // there are subscriptions matching eventName
-                    return /** @type evan.PathCollection */paths
+                    return /** @type giant.PathCollection */paths
                         // querying collection of strings that are relative to `path`
                         .getRangeByPrefixAsHash(path.toString(), true)
                         .toStringCollection()
                         // converting them to a collection of paths
-                        .toPathOrQuery().asType(evan.PathCollection);
+                        .toPathOrQuery().asType(giant.PathCollection);
                 } else {
                     // no subscriptions match eventName
                     // returning empty path collection
-                    return evan.PathCollection.create([]);
+                    return giant.PathCollection.create([]);
                 }
             }
         });
@@ -279,14 +279,14 @@ troop.postpone(evan, 'EventSpace', function () {
 (function () {
     "use strict";
 
-    dessert.addTypes(/** @lends dessert */{
+    giant.addTypes(/** @lends giant */{
         isEventSpace: function (expr) {
-            return evan.EventSpace.isPrototypeOf(expr);
+            return giant.EventSpace.isPrototypeOf(expr);
         },
 
         isEventSpaceOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                   evan.EventSpace.isPrototypeOf(expr);
+                   giant.EventSpace.isPrototypeOf(expr);
         }
     });
 }());

@@ -1,49 +1,49 @@
-/*global dessert, troop, sntls, evan */
-troop.postpone(evan, 'EventStack', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'EventStack', function () {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend();
 
     /**
      * Creates an EventStack instance.
-     * @name evan.EventStack.create
+     * @name giant.EventStack.create
      * @function
-     * @returns {evan.EventStack}
+     * @returns {giant.EventStack}
      */
 
     /**
      * Stores events in a quasi-stack structure.
      * @class
-     * @extends troop.Base
+     * @extends giant.Base
      */
-    evan.EventStack = self
-        .addMethods(/** @lends evan.EventStack# */{
+    giant.EventStack = self
+        .addMethods(/** @lends giant.EventStack# */{
             /**
              * @ignore
              */
             init: function () {
                 /**
                  * Chain structure serving as the buffer for events.
-                 * @type {evan.OpenChain}
+                 * @type {giant.OpenChain}
                  */
-                this.events = evan.OpenChain.create();
+                this.events = giant.OpenChain.create();
             },
 
             /**
-             * Adds an event to the stack. To remove the event from the stack, call .unLink() on the returned evan.ValueLink instance.
-             * @param {evan.Event|*} event
-             * @returns {evan.ValueLink}
+             * Adds an event to the stack. To remove the event from the stack, call .unLink() on the returned giant.ValueLink instance.
+             * @param {giant.Event|*} event
+             * @returns {giant.ValueLink}
              */
             pushEvent: function (event) {
-                var link = evan.ValueLink.create().setValue(event);
+                var link = giant.ValueLink.create().setValue(event);
                 this.events.pushLink(link);
                 return link;
             },
 
             /**
              * Retrieves the last event added to the stack.
-             * @returns {evan.Event|*}
+             * @returns {giant.Event|*}
              */
             getLastEvent: function () {
                 return this.events.lastLink.previousLink.value;

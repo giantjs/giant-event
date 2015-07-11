@@ -1,38 +1,38 @@
 /**
  * Interface that marks a class as target for events. Event targets may subscribe to events.
- * @name evan.EventTarget
+ * @name giant.EventTarget
  * @class
- * @extends troop.Base
+ * @extends giant.Base
  */
 
 /**
  * Subscribes a handler to the specified event, in a specific event space.
- * @name evan.EventTarget#subscribeTo
+ * @name giant.EventTarget#subscribeTo
  * @function
  * @param {string} eventName
- * @returns {evan.EventTarget}
+ * @returns {giant.EventTarget}
  */
 
 /**
  * Unsubscribes a handler from the specified event, in a specific event space.
- * @name evan.EventTarget#unsubscribeFrom
+ * @name giant.EventTarget#unsubscribeFrom
  * @function
  * @param {string} eventName
- * @returns {evan.EventTarget}
+ * @returns {giant.EventTarget}
  */
 
 /**
  * Subscribes a handler to the specified event, in a specific event space, and unsubscribes after the first time it was triggered.
- * @name evan.EventTarget#subscribeToUntilTriggered
+ * @name giant.EventTarget#subscribeToUntilTriggered
  * @function
  * @param {string} eventName
- * @returns {evan.EventTarget}
+ * @returns {giant.EventTarget}
  */
 
 /**
  * Subscribes a handler to the specified event, in a specific event space, but only if the event's original path matches a specified Query.
- * @name evan.EventTarget#delegateSubscriptionTo
+ * @name giant.EventTarget#delegateSubscriptionTo
  * @function
  * @param {string} eventName
- * @returns {evan.EventTarget}
+ * @returns {giant.EventTarget}
  */

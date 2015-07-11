@@ -1,53 +1,53 @@
-/*global dessert, troop, sntls, evan */
-troop.postpone(evan, 'EventCollection', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'EventCollection', function () {
     "use strict";
 
     /**
-     * @name evan.EventCollection.create
+     * @name giant.EventCollection.create
      * @function
      * @param {object} [items] Initial contents.
-     * @return {evan.EventCollection}
+     * @return {giant.EventCollection}
      */
 
     /**
-     * @name evan.EventCollection#eventName
+     * @name giant.EventCollection#eventName
      * @ignore
      */
 
     /**
-     * @name evan.EventCollection#eventSpace
+     * @name giant.EventCollection#eventSpace
      * @ignore
      */
 
     /**
-     * @name evan.EventCollection#canBubble
+     * @name giant.EventCollection#canBubble
      * @ignore
      */
 
     /**
-     * @name evan.EventCollection#payload
+     * @name giant.EventCollection#payload
      * @ignore
      */
 
     /**
-     * @name evan.EventCollection#currentPath
+     * @name giant.EventCollection#currentPath
      * @ignore
      */
 
     /**
-     * @name evan.EventCollection#originalPath
+     * @name giant.EventCollection#originalPath
      * @ignore
      */
 
     /**
-     * @name evan.EventCollection#broadcastPath
+     * @name giant.EventCollection#broadcastPath
      * @ignore
      */
 
     /**
-     * @class evan.EventCollection
-     * @extends sntls.Collection
-     * @extends evan.Event
+     * @class giant.EventCollection
+     * @extends giant.Collection
+     * @extends giant.Event
      */
-    evan.EventCollection = sntls.Collection.of(evan.Event);
+    giant.EventCollection = giant.Collection.of(giant.Event);
 });

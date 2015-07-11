@@ -1,24 +1,24 @@
-/*global dessert, troop, sntls, evan */
-troop.postpone(evan, 'ValueLink', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'ValueLink', function () {
     "use strict";
 
-    var base = evan.Link,
+    var base = giant.Link,
         self = base.extend();
 
     /**
      * Creates a ValueLink instance.
-     * @name evan.ValueLink.create
+     * @name giant.ValueLink.create
      * @function
-     * @returns {evan.ValueLink}
+     * @returns {giant.ValueLink}
      */
 
     /**
      * Link that carries a value, and has the option to be unlinked.
      * @class
-     * @extends evan.Link
+     * @extends giant.Link
      */
-    evan.ValueLink = self
-        .addMethods(/** @lends evan.ValueLink# */{
+    giant.ValueLink = self
+        .addMethods(/** @lends giant.ValueLink# */{
             /** @ignore */
             init: function () {
                 base.init.call(this);
@@ -33,7 +33,7 @@ troop.postpone(evan, 'ValueLink', function () {
             /**
              * Sets link value.
              * @param {*} value
-             * @returns {evan.ValueLink}
+             * @returns {giant.ValueLink}
              */
             setValue: function (value) {
                 this.value = value;

@@ -1,29 +1,29 @@
-/*global dessert, troop, sntls, evan */
-troop.postpone(evan, 'PayloadStore', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'PayloadStore', function () {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend();
 
     /**
-     * @name evan.PayloadStore.create
+     * @name giant.PayloadStore.create
      * @function
-     * @returns {evan.PayloadStore}
+     * @returns {giant.PayloadStore}
      */
 
     /**
      * Stores event payload items indexed by event name and item name.
      * @class
-     * @extends troop.Base
+     * @extends giant.Base
      */
-    evan.PayloadStore = self
-        .addMethods(/** @lends evan.PayloadStore# */{
+    giant.PayloadStore = self
+        .addMethods(/** @lends giant.PayloadStore# */{
             /** @ignore */
             init: function () {
                 /**
-                 * @type {sntls.Tree}
+                 * @type {giant.Tree}
                  */
-                this.payloads = sntls.Tree.create();
+                this.payloads = giant.Tree.create();
             },
 
             /**

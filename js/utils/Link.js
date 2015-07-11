@@ -1,52 +1,52 @@
-/*global dessert, troop, sntls, evan */
-troop.postpone(evan, 'Link', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'Link', function () {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend();
 
     /**
      * Creates a Link instance.
-     * @name evan.Link.create
+     * @name giant.Link.create
      * @function
-     * @returns {evan.Link}
+     * @returns {giant.Link}
      */
 
     /**
      * Basic link, can chain other links to it.
      * @class
-     * @extends troop.Base
+     * @extends giant.Base
      */
-    evan.Link = self
-        .addMethods(/** @lends evan.Link# */{
+    giant.Link = self
+        .addMethods(/** @lends giant.Link# */{
             /** @ignore */
             init: function () {
                 /**
                  * Link that comes before the current link in the chain.
-                 * @type {evan.Link}
+                 * @type {giant.Link}
                  */
                 this.previousLink = undefined;
 
                 /**
                  * Link that comes after the current link in the chain.
-                 * @type {evan.Link}
+                 * @type {giant.Link}
                  */
                 this.nextLink = undefined;
 
                 /**
                  * Chain instance the link is associated with.
-                 * @type {evan.OpenChain}
+                 * @type {giant.OpenChain}
                  */
                 this.parentChain = undefined;
             },
 
             /**
              * Adds current unconnected link after the specified link.
-             * @param {evan.Link} link
-             * @returns {evan.Link}
+             * @param {giant.Link} link
+             * @returns {giant.Link}
              */
             addAfter: function (link) {
-                dessert.assert(!this.previousLink && !this.nextLink,
+                giant.assert(!this.previousLink && !this.nextLink,
                     "Attempted to connect already connected link");
 
                 // setting links on current link
@@ -67,11 +67,11 @@ troop.postpone(evan, 'Link', function () {
 
             /**
              * Adds current link before the specified link.
-             * @param {evan.Link} link
-             * @returns {evan.Link}
+             * @param {giant.Link} link
+             * @returns {giant.Link}
              */
             addBefore: function (link) {
-                dessert.assert(!this.previousLink && !this.nextLink,
+                giant.assert(!this.previousLink && !this.nextLink,
                     "Attempted to connect already connected link");
 
                 // setting links on current link
@@ -92,7 +92,7 @@ troop.postpone(evan, 'Link', function () {
 
             /**
              * Removes link from the chain.
-             * @returns {evan.Link}
+             * @returns {giant.Link}
              */
             unLink: function () {
                 var nextLink = this.nextLink,
@@ -115,11 +115,11 @@ troop.postpone(evan, 'Link', function () {
             /**
              * Sets the parent chain on unconnected links.
              * Fails when called on connected links.
-             * @param {evan.OpenChain} parentChain
-             * @returns {evan.Link}
+             * @param {giant.OpenChain} parentChain
+             * @returns {giant.Link}
              */
             setParentChain: function (parentChain) {
-                dessert.assert(!this.previousLink && !this.nextLink,
+                giant.assert(!this.previousLink && !this.nextLink,
                     "Attempted to set parent chain on connected link");
                 this.parentChain = parentChain;
                 return this;

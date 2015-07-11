@@ -1,15 +1,15 @@
-/*global dessert, troop, sntls, evan */
-troop.postpone(evan, 'nextPayloadStore', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'nextPayloadStore', function () {
     "use strict";
 
     /**
      * Temporary storage for event payload.
-     * @type {evan.PayloadStore}
+     * @type {giant.PayloadStore}
      */
-    evan.nextPayloadStore = evan.PayloadStore.create();
+    giant.nextPayloadStore = giant.PayloadStore.create();
 });
 
-troop.postpone(evan, 'setNextPayloadItem', function () {
+giant.postpone(giant, 'setNextPayloadItem', function () {
     "use strict";
 
     /**
@@ -19,12 +19,12 @@ troop.postpone(evan, 'setNextPayloadItem', function () {
      * @param {string} payloadItemName
      * @param {*} payloadItemValue
      */
-    evan.setNextPayloadItem = function (eventName, payloadItemName, payloadItemValue) {
-        evan.nextPayloadStore.setPayloadItem(eventName, payloadItemName, payloadItemValue);
+    giant.setNextPayloadItem = function (eventName, payloadItemName, payloadItemValue) {
+        giant.nextPayloadStore.setPayloadItem(eventName, payloadItemName, payloadItemValue);
     };
 });
 
-troop.postpone(evan, 'setNextPayloadItems', function () {
+giant.postpone(giant, 'setNextPayloadItems', function () {
     "use strict";
 
     /**
@@ -32,12 +32,12 @@ troop.postpone(evan, 'setNextPayloadItems', function () {
      * @param {string} eventName
      * @param {object} payload
      */
-    evan.setNextPayloadItems = function (eventName, payload) {
-        evan.nextPayloadStore.setPayloadItems(eventName, payload);
+    giant.setNextPayloadItems = function (eventName, payload) {
+        giant.nextPayloadStore.setPayloadItems(eventName, payload);
     };
 });
 
-troop.postpone(evan, 'deleteNextPayloadItem', function () {
+giant.postpone(giant, 'deleteNextPayloadItem', function () {
     "use strict";
 
     /**
@@ -45,12 +45,12 @@ troop.postpone(evan, 'deleteNextPayloadItem', function () {
      * @param {string} eventName
      * @param {string} payloadItemName
      */
-    evan.deleteNextPayloadItem = function (eventName, payloadItemName) {
-        evan.nextPayloadStore.deletePayloadItem(eventName, payloadItemName);
+    giant.deleteNextPayloadItem = function (eventName, payloadItemName) {
+        giant.nextPayloadStore.deletePayloadItem(eventName, payloadItemName);
     };
 });
 
-troop.postpone(evan, 'deleteNextPayloadItems', function () {
+giant.postpone(giant, 'deleteNextPayloadItems', function () {
     "use strict";
 
     /**
@@ -58,8 +58,8 @@ troop.postpone(evan, 'deleteNextPayloadItems', function () {
      * Pass item names following the first argument.
      * @param {string} eventName
      */
-    evan.deleteNextPayloadItems = function (eventName) {
-        var nextPayloadStore = evan.nextPayloadStore;
+    giant.deleteNextPayloadItems = function (eventName) {
+        var nextPayloadStore = giant.nextPayloadStore;
         nextPayloadStore.deletePayloadItems.apply(nextPayloadStore, arguments);
     };
 });

@@ -1,21 +1,21 @@
-/*global sntls, evan, Event, module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, raises */
+/*global giant, giant, Event, module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, raises */
 (function () {
     "use strict";
 
     module("Event");
 
-    var eventSpace = evan.EventSpace.create();
+    var eventSpace = giant.EventSpace.create();
 
     test("Instantiation", function () {
         raises(function () {
-            evan.Event.create();
+            giant.Event.create();
         }, "should raise exception on invalid event name argument");
 
         raises(function () {
-            evan.Event.create('foo');
+            giant.Event.create('foo');
         }, "should raise exception on invalid event space argument");
 
-        var event = evan.Event.create('testEvent', eventSpace);
+        var event = giant.Event.create('testEvent', eventSpace);
 
         equal(event.eventName, 'testEvent', "should set event name");
         strictEqual(event.eventSpace, eventSpace, "should set event space");
@@ -32,7 +32,7 @@
     });
 
     test("Cloning event", function () {
-        var MyEvent = evan.Event.extend(),
+        var MyEvent = giant.Event.extend(),
             originalEvent = MyEvent.create('testEvent', eventSpace)
                 .setTargetPath('test.path.hello.world'.toPath())
                 .setPayloadItem('foo', 'bar'),
@@ -64,8 +64,8 @@
     });
 
     test("Setting original event", function () {
-        var originalEvent = evan.Event.create('originalEvent', eventSpace),
-            event = evan.Event.create('testEvent', eventSpace);
+        var originalEvent = giant.Event.create('originalEvent', eventSpace),
+            event = giant.Event.create('testEvent', eventSpace);
 
         strictEqual(event.setOriginalEvent(originalEvent), event, "should be chainable");
         strictEqual(event.originalEvent, originalEvent, "should set original event");
@@ -73,30 +73,30 @@
 
     test("Getting original event by type", function () {
         var event1 = new Event('foo'),
-            Event2 = evan.Event.extend(),
-            Event3 = evan.Event.extend(),
-            event2 = Event2.create('event2', evan.EventSpace.create())
+            Event2 = giant.Event.extend(),
+            Event3 = giant.Event.extend(),
+            event2 = Event2.create('event2', giant.EventSpace.create())
                 .setOriginalEvent(event1),
-            event3 = Event3.create('event3', evan.EventSpace.create())
+            event3 = Event3.create('event3', giant.EventSpace.create())
                 .setOriginalEvent(event2),
-            event = evan.Event.create('event', evan.EventSpace.create())
+            event = giant.Event.create('event', giant.EventSpace.create())
                 .setOriginalEvent(event3);
 
         strictEqual(event.getOriginalEventByType(Event), event1);
         strictEqual(event.getOriginalEventByType(Event2), event2);
         strictEqual(event.getOriginalEventByType(Event3), event3);
-        strictEqual(event.getOriginalEventByType(evan.Event), event3);
+        strictEqual(event.getOriginalEventByType(giant.Event), event3);
     });
 
     test("Setting default prevention flag", function () {
-        var event = evan.Event.create('testEvent', eventSpace);
+        var event = giant.Event.create('testEvent', eventSpace);
 
         strictEqual(event.preventDefault(), event, "should be chainable");
         equal(event.defaultPrevented, true, "should set defaultPrevented to true");
     });
 
     test("Setting target path", function () {
-        var event = evan.Event.create('testEvent', eventSpace);
+        var event = giant.Event.create('testEvent', eventSpace);
 
         raises(function () {
             event.setTargetPath('test>path');
@@ -104,8 +104,8 @@
 
         event.setTargetPath('test>path'.toPath());
 
-        ok(event.originalPath.instanceOf(sntls.Path), "should set a Path instance as originalPath");
-        ok(event.currentPath.instanceOf(sntls.Path), "should set a Path instance as currentPath");
+        ok(event.originalPath.instanceOf(giant.Path), "should set a Path instance as originalPath");
+        ok(event.currentPath.instanceOf(giant.Path), "should set a Path instance as currentPath");
 
         notStrictEqual(event.originalPath, event.currentPath,
             "should set different Path instances for originalPath and currentPath");
@@ -114,7 +114,7 @@
     });
 
     test("Sender setter", function () {
-        var event = evan.Event.create('testEvent', eventSpace),
+        var event = giant.Event.create('testEvent', eventSpace),
             sender = {};
 
         strictEqual(event.setSender(sender), event, "should be chainable");
@@ -122,7 +122,7 @@
     });
 
     test("Setting single payload item", function () {
-        var event = evan.Event.create('testEvent', eventSpace);
+        var event = giant.Event.create('testEvent', eventSpace);
 
         strictEqual(event.setPayloadItem('foo', 'bar'), event, "should be chainable");
 
@@ -139,7 +139,7 @@
     });
 
     test("Setting multiple payload item", function () {
-        var event = evan.Event.create('testEvent', eventSpace);
+        var event = giant.Event.create('testEvent', eventSpace);
 
         strictEqual(event.setPayloadItems({
             foo  : 'bar',
@@ -155,8 +155,8 @@
     test("Triggering event", function () {
         expect(14);
 
-        var originalEvent = evan.Event.create('original-event', eventSpace),
-            event = evan.Event.create('test-event', eventSpace)
+        var originalEvent = giant.Event.create('original-event', eventSpace),
+            event = giant.Event.create('test-event', eventSpace)
                 .setPayloadItem('foo', 'bar')
                 .setOriginalEvent(originalEvent),
             handledFlags = [],
@@ -166,7 +166,7 @@
             event.triggerSync('foo');
         }, "should raise exception on invalid target path");
 
-        evan.EventSpace.addMocks({
+        giant.EventSpace.addMocks({
             callHandlers: function (event) {
                 equal(event.eventName, 'test-event',
                     "should call handlers with correct event name");
@@ -193,15 +193,15 @@
         deepEqual(event.payload, {foo: 'bar'}, "should leave payload intact");
         strictEqual(event.originalEvent, originalEvent, "should leave original event intact");
 
-        evan.EventSpace.removeMocks();
+        giant.EventSpace.removeMocks();
     });
 
     test("Triggering with stop-propagation", function () {
         expect(1);
 
-        var event = evan.Event.create('testEvent', eventSpace);
+        var event = giant.Event.create('testEvent', eventSpace);
 
-        evan.EventSpace.addMocks({
+        giant.EventSpace.addMocks({
             callHandlers: function (event) {
                 equal(event.currentPath.toString(), 'test>path', "should call handlers on specified path");
 
@@ -212,33 +212,33 @@
 
         event.triggerSync('test>path'.toPath());
 
-        evan.EventSpace.removeMocks();
+        giant.EventSpace.removeMocks();
     });
 
     test("Triggering on queries", function () {
         expect(2);
 
-        var event = evan.Event.create('testEvent', eventSpace);
+        var event = giant.Event.create('testEvent', eventSpace);
 
-        evan.EventSpace.addMocks({
+        giant.EventSpace.addMocks({
             callHandlers: function (event) {
-                ok(event.currentPath.isA(sntls.Query), "should call handlers with query");
+                ok(event.currentPath.isA(giant.Query), "should call handlers with query");
                 equal(event.currentPath.toString(), 'test>|>path', "should set correct query contents");
             }
         });
 
         event.triggerSync('test>|>path'.toQuery());
 
-        evan.EventSpace.removeMocks();
+        giant.EventSpace.removeMocks();
     });
 
     test("Triggering without bubbling", function () {
         expect(1);
 
-        var event = evan.Event.create('testEvent', eventSpace)
+        var event = giant.Event.create('testEvent', eventSpace)
             .allowBubbling(false);
 
-        evan.EventSpace.addMocks({
+        giant.EventSpace.addMocks({
             callHandlers: function (event) {
                 equal(event.currentPath.toString(), 'test>path', "should call handlers only once");
             }
@@ -246,16 +246,16 @@
 
         event.triggerSync('test>path'.toPath());
 
-        evan.EventSpace.removeMocks();
+        giant.EventSpace.removeMocks();
     });
 
     test("Triggering with pre-set target", function () {
         expect(1);
 
-        var event = evan.Event.create('testEvent', eventSpace)
+        var event = giant.Event.create('testEvent', eventSpace)
             .setTargetPath('test>path'.toPath());
 
-        evan.EventSpace.addMocks({
+        giant.EventSpace.addMocks({
             callHandlers: function (event) {
                 equal(event.currentPath.toString(), 'test>path',
                     "should call handlers on pre-set path");
@@ -267,14 +267,14 @@
 
         event.triggerSync();
 
-        evan.EventSpace.removeMocks();
+        giant.EventSpace.removeMocks();
     });
 
     test("Broadcasting event", function () {
         expect(10);
 
         var triggeredPaths = [],
-            eventSpace = evan.EventSpace.create()
+            eventSpace = giant.EventSpace.create()
                 .subscribeTo('my-event', 'test>event'.toPath(), function () {})
                 .subscribeTo('my-event', 'test>event>foo'.toPath(), function () {})
                 .subscribeTo('my-event', 'test>event>foo>bar'.toPath(), function () {})
@@ -291,7 +291,7 @@
             event.broadcastSync('foo');
         }, "should raise exception on invalid broadcast path");
 
-        evan.Event.addMocks({
+        giant.Event.addMocks({
             triggerSync: function () {
                 triggeredPaths.push(this.originalPath.toString());
                 deepEqual(this.payload, {foo: 'bar'}, "should set payload on spawned event");
@@ -301,7 +301,7 @@
 
         event.broadcastSync('test>event'.toPath());
 
-        evan.Event.removeMocks();
+        giant.Event.removeMocks();
 
         deepEqual(
             triggeredPaths,
@@ -322,7 +322,7 @@
                     "should call handlers on pre-set path");
 
                 // just so the rest of the method can complete
-                return evan.Event.create('foo', eventSpace)
+                return giant.Event.create('foo', eventSpace)
                     .setTargetPath(broadcastPath);
             }
         });

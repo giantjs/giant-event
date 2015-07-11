@@ -1,11 +1,11 @@
-/*global sntls, evan, Event, module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, raises */
+/*global giant, giant, Event, module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, raises */
 (function () {
     "use strict";
 
     module("Link");
 
     test("Instantiation", function () {
-        var link = evan.Link.create();
+        var link = giant.Link.create();
 
         ok(link.hasOwnProperty('previousLink'), "should add previousLink property");
         ok(link.hasOwnProperty('nextLink'), "should add nextLink property");
@@ -13,9 +13,9 @@
     });
 
     test("Adding link after disconnected link", function () {
-        var chain = evan.OpenChain.create(),
-            link = evan.Link.create(),
-            previousLink = evan.Link.create()
+        var chain = giant.OpenChain.create(),
+            link = giant.Link.create(),
+            previousLink = giant.Link.create()
                 .setParentChain(chain);
 
         strictEqual(link.addAfter(previousLink), link, "should be chainable");
@@ -24,14 +24,14 @@
         strictEqual(previousLink.nextLink, link, "should set nextLink on previous link");
 
         raises(function () {
-            link.addAfter(evan.Link.create());
+            link.addAfter(giant.Link.create());
         }, "should raise exception on attempting to add already connected link");
     });
 
     test("Adding link after connected link", function () {
-        var link = evan.Link.create(),
-            previousLink = evan.Link.create(),
-            nextLink = evan.Link.create()
+        var link = giant.Link.create(),
+            previousLink = giant.Link.create(),
+            nextLink = giant.Link.create()
                 .addAfter(previousLink);
 
         link.addAfter(previousLink);
@@ -43,9 +43,9 @@
     });
 
     test("Adding link before disconnected link", function () {
-        var chain = evan.OpenChain.create(),
-            link = evan.Link.create(),
-            nextLink = evan.Link.create()
+        var chain = giant.OpenChain.create(),
+            link = giant.Link.create(),
+            nextLink = giant.Link.create()
                 .setParentChain(chain);
 
         strictEqual(link.addBefore(nextLink), link, "should be chainable");
@@ -54,14 +54,14 @@
         strictEqual(nextLink.previousLink, link, "should set previousLink on after link");
 
         raises(function () {
-            link.addBefore(evan.Link.create());
+            link.addBefore(giant.Link.create());
         }, "should raise exception on attempting to add already connected link");
     });
 
     test("Adding link before connected link", function () {
-        var link = evan.Link.create(),
-            nextLink = evan.Link.create(),
-            previousLink = evan.Link.create()
+        var link = giant.Link.create(),
+            nextLink = giant.Link.create(),
+            previousLink = giant.Link.create()
                 .addBefore(nextLink);
 
         link.addBefore(nextLink);
@@ -73,10 +73,10 @@
     });
 
     test("Link removal", function () {
-        var link = evan.Link.create(),
-            afterLink = evan.Link.create()
+        var link = giant.Link.create(),
+            afterLink = giant.Link.create()
                 .addAfter(link),
-            beforeLink = evan.Link.create()
+            beforeLink = giant.Link.create()
                 .addBefore(link);
 
         strictEqual(link.unLink(), link, "should be chainable");
@@ -87,7 +87,7 @@
     });
 
     test("Unlinking lone link", function () {
-        var link = evan.Link.create();
+        var link = giant.Link.create();
 
         link.unLink();
         ok(!link.nextLink, "should leave nextLink unaffected");
@@ -95,14 +95,14 @@
     });
 
     test("Setting parent chain", function () {
-        var link = evan.Link.create(),
-            chain = evan.OpenChain.create();
+        var link = giant.Link.create(),
+            chain = giant.OpenChain.create();
 
         strictEqual(link.setParentChain(chain), link, "should be chainable");
         strictEqual(link.parentChain, chain, "should set parentChain property");
 
         raises(function () {
-            evan.Link.create()
+            giant.Link.create()
                 .addAfter(link)
                 .setParentChain(chain);
         }, "should raise exception on attempting to set parent on a connected link");

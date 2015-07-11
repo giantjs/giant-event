@@ -1,15 +1,15 @@
-/*global dessert, troop, sntls, evan */
-troop.postpone(evan, 'OpenChain', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'OpenChain', function () {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend();
 
     /**
      * Creates an OpenChain instance.
-     * @name evan.OpenChain.create
+     * @name giant.OpenChain.create
      * @function
-     * @returns {evan.OpenChain}
+     * @returns {giant.OpenChain}
      */
 
     /**
@@ -17,30 +17,30 @@ troop.postpone(evan, 'OpenChain', function () {
      * OpenChain behaves like a stack in that you may append and prepend the chain
      * using a stack-like API. (push, pop, etc.)
      * @class
-     * @extends troop.Base
+     * @extends giant.Base
      */
-    evan.OpenChain = self
-        .addMethods(/** @lends evan.OpenChain# */{
+    giant.OpenChain = self
+        .addMethods(/** @lends giant.OpenChain# */{
             /** @ignore */
             init: function () {
                 /**
                  * First (fixed) link in the chain.
-                 * @type {evan.ValueLink}
+                 * @type {giant.ValueLink}
                  */
-                this.firstLink = evan.Link.create()
+                this.firstLink = giant.Link.create()
                     .setParentChain(this);
 
                 /**
                  * Last (fixed) link in the chain.
-                 * @type {evan.ValueLink}
+                 * @type {giant.ValueLink}
                  */
-                this.lastLink = evan.Link.create()
+                this.lastLink = giant.Link.create()
                     .addAfter(this.firstLink);
             },
 
             /**
              * Adds link at the end of the chain.
-             * @param {evan.Link} link
+             * @param {giant.Link} link
              */
             pushLink: function (link) {
                 link.addBefore(this.lastLink);
@@ -49,7 +49,7 @@ troop.postpone(evan, 'OpenChain', function () {
 
             /**
              * Removes link from the end of the chain and returns removed link.
-             * @returns {evan.Link}
+             * @returns {giant.Link}
              */
             popLink: function () {
                 return this.lastLink.previousLink
@@ -58,7 +58,7 @@ troop.postpone(evan, 'OpenChain', function () {
 
             /**
              * Adds link at the start of the chain.
-             * @param {evan.Link} link
+             * @param {giant.Link} link
              */
             unshiftLink: function (link) {
                 link.addAfter(this.firstLink);
@@ -67,7 +67,7 @@ troop.postpone(evan, 'OpenChain', function () {
 
             /**
              * Removes link from the start of the chain and returns removed link.
-             * @returns {evan.Link}
+             * @returns {giant.Link}
              */
             shiftLink: function () {
                 return this.firstLink.nextLink

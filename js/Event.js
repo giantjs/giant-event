@@ -1,32 +1,32 @@
-/*global dessert, troop, sntls, evan */
-troop.postpone(evan, 'Event', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'Event', function () {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend();
 
     /**
      * Instantiates class.
-     * @name evan.Event.create
+     * @name giant.Event.create
      * @function
      * @param {string} eventName Event name
-     * @param {evan.EventSpace} eventSpace Event space associated with event
-     * @return {evan.Event}
+     * @param {giant.EventSpace} eventSpace Event space associated with event
+     * @return {giant.Event}
      */
 
     /**
      * An event is an object that may traverse in an event space.
      * Events carry all information regarding their position & properties.
      * @class
-     * @extends troop.Base
-     * @extends evan.EventSource
+     * @extends giant.Base
+     * @extends giant.EventSource
      */
-    evan.Event = self
-        .addPrivateMethods(/** @lends evan.Event# */{
+    giant.Event = self
+        .addPrivateMethods(/** @lends giant.Event# */{
             /**
              * Creates a new event instance and prepares it to be triggered.
-             * @param {sntls.Path} targetPath
-             * @return {evan.Event}
+             * @param {giant.Path} targetPath
+             * @return {giant.Event}
              * @private
              */
             _spawnMainBroadcastEvent: function (targetPath) {
@@ -38,9 +38,9 @@ troop.postpone(evan, 'Event', function () {
             /**
              * Creates a new event instance and prepares it to be broadcast.
              * Broadcast events do not bubble.
-             * @param {sntls.Path} broadcastPath
-             * @param {sntls.Path} targetPath
-             * @return {evan.Event}
+             * @param {giant.Path} broadcastPath
+             * @param {giant.Path} targetPath
+             * @return {giant.Event}
              * @private
              */
             _spawnBroadcastEvent: function (broadcastPath, targetPath) {
@@ -50,14 +50,14 @@ troop.postpone(evan, 'Event', function () {
                     .setTargetPath(targetPath);
             }
         })
-        .addMethods(/** @lends evan.Event# */{
+        .addMethods(/** @lends giant.Event# */{
             /**
              * @param {string} eventName Event name
-             * @param {evan.EventSpace} eventSpace Event space associated with event
+             * @param {giant.EventSpace} eventSpace Event space associated with event
              * @ignore
              */
             init: function (eventName, eventSpace) {
-                dessert
+                giant
                     .isString(eventName, "Invalid event name")
                     .isEventSpace(eventSpace, "Invalid event space");
 
@@ -68,7 +68,7 @@ troop.postpone(evan, 'Event', function () {
                 this.eventName = eventName;
 
                 /**
-                 * @type {evan.EventSpace}
+                 * @type {giant.EventSpace}
                  * @constant
                  */
                 this.eventSpace = eventSpace;
@@ -82,9 +82,9 @@ troop.postpone(evan, 'Event', function () {
                 /**
                  * Evan event or DOM event that led to triggering the current event.
                  * In most cases, this property is not set directly, but through
-                 * evan.pushOriginalEvent()
-                 * @type {evan.Event|*}
-                 * @see evan.pushOriginalEvent
+                 * giant.pushOriginalEvent()
+                 * @type {giant.Event|*}
+                 * @see giant.pushOriginalEvent
                  */
                 this.originalEvent = undefined;
 
@@ -109,28 +109,28 @@ troop.postpone(evan, 'Event', function () {
                 /**
                  * Custom payload to be carried by the event.
                  * In most cases, this property is not modified directly, but through
-                 * evan.setNextPayloadItem()
+                 * giant.setNextPayloadItem()
                  * @type {object}
-                 * @see evan.setNextPayloadItem
+                 * @see giant.setNextPayloadItem
                  */
                 this.payload = {};
 
                 /**
                  * Path reflecting current state of bubbling
-                 * @type {evan.Path}
+                 * @type {giant.Path}
                  */
                 this.currentPath = undefined;
 
                 /**
                  * Path on which the event was originally triggered
-                 * @type {sntls.Path}
+                 * @type {giant.Path}
                  */
                 this.originalPath = undefined;
 
                 /**
                  * Reference to the original target path if
                  * the event was triggered as part of a broadcast.
-                 * @type {sntls.Path}
+                 * @type {giant.Path}
                  */
                 this.broadcastPath = undefined;
             },
@@ -139,11 +139,11 @@ troop.postpone(evan, 'Event', function () {
              * Clones event and optionally sets its currentPath property to
              * the one specified by the argument.
              * Override in subclasses to clone additional properties.
-             * @param {sntls.Path} [currentPath]
-             * @return {evan.Event}
+             * @param {giant.Path} [currentPath]
+             * @return {giant.Event}
              */
             clone: function (currentPath) {
-                dessert.isPathOptional(currentPath, "Invalid current event path");
+                giant.isPathOptional(currentPath, "Invalid current event path");
 
                 var result = this.getBase().create(this.eventName, this.eventSpace);
 
@@ -169,18 +169,18 @@ troop.postpone(evan, 'Event', function () {
             /**
              * Sets whether the event can bubble
              * @param {boolean} value Bubbling flag
-             * @return {evan.Event}
+             * @return {giant.Event}
              */
             allowBubbling: function (value) {
-                dessert.isBoolean(value, "Invalid bubbling flag");
+                giant.isBoolean(value, "Invalid bubbling flag");
                 this.canBubble = value;
                 return this;
             },
 
             /**
              * Sets original event that led to triggering the current event.
-             * @param {evan.Event|*} originalEvent
-             * @returns {evan.Event}
+             * @param {giant.Event|*} originalEvent
+             * @returns {giant.Event}
              */
             setOriginalEvent: function (originalEvent) {
                 this.originalEvent = originalEvent;
@@ -189,7 +189,7 @@ troop.postpone(evan, 'Event', function () {
 
             /**
              * Retrieves event from chain of original events by type.
-             * @returns {evan.Event|*} Original event matching the specified type.
+             * @returns {giant.Event|*} Original event matching the specified type.
              */
             getOriginalEventByType: function (eventType) {
                 var that = this.originalEvent,
@@ -204,7 +204,7 @@ troop.postpone(evan, 'Event', function () {
                             that = that.originalEvent;
                         }
                     }
-                } else if (troop.Base.isBaseOf(eventType)) {
+                } else if (giant.Base.isBaseOf(eventType)) {
                     while (that) {
                         if (eventType.isBaseOf(that)) {
                             result = that;
@@ -220,7 +220,7 @@ troop.postpone(evan, 'Event', function () {
 
             /**
              * Sets flag for default behavior prevention to true.
-             * @returns {evan.Event}
+             * @returns {giant.Event}
              */
             preventDefault: function () {
                 this.defaultPrevented = true;
@@ -229,11 +229,11 @@ troop.postpone(evan, 'Event', function () {
 
             /**
              * Assigns paths to the event.
-             * @param {sntls.Path} targetPath Path on which to trigger event.
-             * @return {evan.Event}
+             * @param {giant.Path} targetPath Path on which to trigger event.
+             * @return {giant.Event}
              */
             setTargetPath: function (targetPath) {
-                dessert.isPath(targetPath, "Invalid target path");
+                giant.isPath(targetPath, "Invalid target path");
                 this.originalPath = targetPath;
                 this.currentPath = targetPath.clone();
                 return this;
@@ -241,11 +241,11 @@ troop.postpone(evan, 'Event', function () {
 
             /**
              * Assigns a broadcast path to the event.
-             * @param {sntls.Path} broadcastPath Path associated with broadcasting.
-             * @return {evan.Event}
+             * @param {giant.Path} broadcastPath Path associated with broadcasting.
+             * @return {giant.Event}
              */
             setBroadcastPath: function (broadcastPath) {
-                dessert.isPath(broadcastPath, "Invalid broadcast path");
+                giant.isPath(broadcastPath, "Invalid broadcast path");
                 this.broadcastPath = broadcastPath;
                 return this;
             },
@@ -253,7 +253,7 @@ troop.postpone(evan, 'Event', function () {
             /**
              * Sets event sender reference.
              * @param {*} sender
-             * @returns {evan.Event}
+             * @returns {giant.Event}
              */
             setSender: function (sender) {
                 this.sender = sender;
@@ -263,11 +263,11 @@ troop.postpone(evan, 'Event', function () {
             /**
              * Sets an item on the event payload.
              * An event may carry multiple payload items set by multiple sources.
-             * User payloads are usually set via evan.setNextPayloadItem.
+             * User payloads are usually set via giant.setNextPayloadItem.
              * @param {string} payloadName
              * @param {*} payloadValue
-             * @return {evan.Event}
-             * @see evan.EventSpace#setNextPayloadItem
+             * @return {giant.Event}
+             * @see giant.EventSpace#setNextPayloadItem
              */
             setPayloadItem: function (payloadName, payloadValue) {
                 this.payload[payloadName] = payloadValue;
@@ -277,9 +277,9 @@ troop.postpone(evan, 'Event', function () {
             /**
              * Sets multiple payload items in the current event's payload.
              * An event may carry multiple payload items set by multiple sources.
-             * User payloads are usually set via evan.setNextPayloadItems.
+             * User payloads are usually set via giant.setNextPayloadItems.
              * @param {object} payloadItems
-             * @return {evan.Event}
+             * @return {giant.Event}
              */
             setPayloadItems: function (payloadItems) {
                 var payload = this.payload,
@@ -299,11 +299,11 @@ troop.postpone(evan, 'Event', function () {
              * Event handlers are assumed to be synchronous. Event properties change
              * between stages of bubbling, hence holding on to an event instance in an async handler
              * may not reflect the current paths and payload carried.
-             * @param {sntls.Path} [targetPath] Path on which to trigger event.
-             * @return {evan.Event}
+             * @param {giant.Path} [targetPath] Path on which to trigger event.
+             * @return {giant.Event}
              */
             triggerSync: function (targetPath) {
-                dessert.isPathOptional(targetPath, "Invalid target path");
+                giant.isPathOptional(targetPath, "Invalid target path");
 
                 // preparing event for trigger
                 if (targetPath) {
@@ -315,7 +315,7 @@ troop.postpone(evan, 'Event', function () {
                     handlerCount;
 
 
-                if (!this.canBubble || this.originalPath.isA(sntls.Query)) {
+                if (!this.canBubble || this.originalPath.isA(giant.Query)) {
                     // event can't bubble because it's not allowed to
                     // or because path is a query and queries shouldn't bubble
                     // calling subscribed handlers once
@@ -346,11 +346,11 @@ troop.postpone(evan, 'Event', function () {
              * Events spawned by a broadcast do not bubble except for the one that is triggered
              * on the specified broadcast path. It is necessary for delegates to react to
              * broadcasts.
-             * @param {sntls.Path} [broadcastPath] Target root for broadcast.
-             * @return {evan.Event}
+             * @param {giant.Path} [broadcastPath] Target root for broadcast.
+             * @return {giant.Event}
              */
             broadcastSync: function (broadcastPath) {
-                dessert.isPathOptional(broadcastPath, "Invalid broadcast path");
+                giant.isPathOptional(broadcastPath, "Invalid broadcast path");
 
                 // defaulting to current path in case broadcast path was omitted
                 broadcastPath = broadcastPath || this.currentPath;
@@ -361,7 +361,7 @@ troop.postpone(evan, 'Event', function () {
                         .getPathsRelativeTo(this.eventName, broadcastPath)
                         // spawning an event for each subscribed path
                         .passEachItemTo(this._spawnBroadcastEvent, this, 1, broadcastPath)
-                        .asType(evan.EventCollection)
+                        .asType(giant.EventCollection)
                         // adding main event
                         .setItem('main', mainEvent);
 
@@ -380,16 +380,16 @@ troop.postpone(evan, 'Event', function () {
 (function () {
     "use strict";
 
-    dessert.addTypes(/** @lends dessert */{
-        /** @param {evan.Event} expr */
+    giant.addTypes(/** @lends giant */{
+        /** @param {giant.Event} expr */
         isEvent: function (expr) {
-            return evan.Event.isBaseOf(expr);
+            return giant.Event.isBaseOf(expr);
         },
 
-        /** @param {evan.Event} expr */
+        /** @param {giant.Event} expr */
         isEventOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                   evan.Event.isBaseOf(expr);
+                   giant.Event.isBaseOf(expr);
         }
     });
 }());

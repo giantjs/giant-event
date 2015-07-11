@@ -1,23 +1,23 @@
-/*global dessert, troop, sntls, evan */
-troop.postpone(evan, 'PathCollection', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'PathCollection', function () {
     "use strict";
 
     /**
-     * @name evan.PathCollection.create
+     * @name giant.PathCollection.create
      * @function
      * @param {object} [items] Initial contents.
-     * @return {evan.PathCollection}
+     * @return {giant.PathCollection}
      */
 
     /**
-     * @name evan.PathCollection#asArray
+     * @name giant.PathCollection#asArray
      * @ignore
      */
 
     /**
-     * @class evan.PathCollection
-     * @extends sntls.Collection
-     * @extends sntls.Path
+     * @class giant.PathCollection
+     * @extends giant.Collection
+     * @extends giant.Path
      */
-    evan.PathCollection = sntls.Collection.of(sntls.Path);
+    giant.PathCollection = giant.Collection.of(giant.Path);
 });

@@ -1,17 +1,17 @@
-/*global sntls, evan, module, test, expect, ok, equal, strictEqual, deepEqual, raises */
+/*global giant, giant, module, test, expect, ok, equal, strictEqual, deepEqual, raises */
 (function () {
     "use strict";
 
     module("PayloadStore");
 
     test("Instantiation", function () {
-        var payloadStore = evan.PayloadStore.create(this);
+        var payloadStore = giant.PayloadStore.create(this);
 
-        ok(payloadStore.payloads.isA(sntls.Tree), "should add payloads property");
+        ok(payloadStore.payloads.isA(giant.Tree), "should add payloads property");
     });
 
     test("Setting single payload item", function () {
-        var payloadStore = evan.PayloadStore.create(this);
+        var payloadStore = giant.PayloadStore.create(this);
 
         strictEqual(payloadStore.setPayloadItem('foo', 'bar', 'baz'), payloadStore,
             "should be chainable");
@@ -24,7 +24,7 @@
     });
 
     test("Setting multiple payload items", function () {
-        var payloadStore = evan.PayloadStore.create(this);
+        var payloadStore = giant.PayloadStore.create(this);
 
         strictEqual(payloadStore.setPayloadItems('foo', {
             'bar'  : 'baz',
@@ -40,7 +40,7 @@
     });
 
     test("Deleting single payload item", function () {
-        var payloadStore = evan.PayloadStore.create(this)
+        var payloadStore = giant.PayloadStore.create(this)
             .setPayloadItems('foo', {
                 'bar'  : 'baz',
                 'hello': 'world'
@@ -57,7 +57,7 @@
     });
 
     test("Deleting multiple payload items", function () {
-        var payloadStore = evan.PayloadStore.create(this)
+        var payloadStore = giant.PayloadStore.create(this)
             .setPayloadItems('foo', {
                 'bar'  : 'baz',
                 'hello': 'world'
@@ -73,7 +73,7 @@
     });
 
     test("Payload getter", function () {
-        var payloadStore = evan.PayloadStore.create(this)
+        var payloadStore = giant.PayloadStore.create(this)
             .setPayloadItems('foo', {
                 'bar'  : 'baz',
                 'hello': 'world'
