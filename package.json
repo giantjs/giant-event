@@ -4,9 +4,8 @@
     "description"    : "Eventing module for Giant",
     "keywords"       : [
         "custom",
-        "events",
-        "event",
-        "giant"
+        "universal event",
+        "event"
     ],
     "author"         : "Dan Stocker <dan@kwaia.com>",
     "copyright"      : "Copyright (c) 2012-2015 Dan Stocker",
