@@ -1,4 +1,4 @@
-/*global giant, giant */
+/*global giant */
 giant.postpone(giant, 'eventSpace', function () {
     "use strict";
 
