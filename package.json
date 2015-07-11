@@ -1,7 +1,7 @@
 {
     "name"           : "giant-event",
     "version"        : "0.0.3",
-    "description"    : "Universal events",
+    "description"    : "Eventing module for Giant",
     "keywords"       : [
         "custom",
         "events",
