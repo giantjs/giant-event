@@ -80,7 +80,7 @@ giant.postpone(giant, 'Event', function () {
                 this.canBubble = true;
 
                 /**
-                 * Evan event or DOM event that led to triggering the current event.
+                 * Giant event or DOM event that led to triggering the current event.
                  * In most cases, this property is not set directly, but through
                  * giant.pushOriginalEvent()
                  * @type {giant.Event|*}
