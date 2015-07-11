@@ -4,28 +4,28 @@ module.exports = function (grunt) {
 
     var params = {
         files: [
-            'js/namespace.js',
-            'js/interfaces/EventSpawner.js',
-            'js/interfaces/EventSource.js',
-            'js/interfaces/EventTarget.js',
-            'js/utils/Link.js',
-            'js/utils/ValueLink.js',
-            'js/utils/OpenChain.js',
-            'js/PathCollection.js',
-            'js/Event.js',
-            'js/EventCollection.js',
-            'js/EventSpace.js',
-            'js/Evented.js',
-            'js/EventStack.js',
-            'js/PayloadStore.js',
-            'js/globals/originalEventStack.js',
-            'js/globals/nextPayloadStore.js',
-            'js/globals/eventSpace.js',
-            'js/exports.js'
+            'src/namespace.js',
+            'src/interfaces/EventSpawner.js',
+            'src/interfaces/EventSource.js',
+            'src/interfaces/EventTarget.js',
+            'src/utils/Link.js',
+            'src/utils/ValueLink.js',
+            'src/utils/OpenChain.js',
+            'src/PathCollection.js',
+            'src/Event.js',
+            'src/EventCollection.js',
+            'src/EventSpace.js',
+            'src/Evented.js',
+            'src/EventStack.js',
+            'src/PayloadStore.js',
+            'src/globals/originalEventStack.js',
+            'src/globals/nextPayloadStore.js',
+            'src/globals/eventSpace.js',
+            'src/exports.js'
         ],
 
         test: [
-            'js/jsTestDriver.conf'
+            'src/jsTestDriver.conf'
         ],
 
         globals: {}
