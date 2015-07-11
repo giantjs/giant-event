@@ -18,6 +18,7 @@
     "dependencies"   : {
         "giant-assertion": "0.0.3",
         "giant-data"     : "0.0.3",
+        "giant-namespace": "0.0.3",
         "giant-oop"      : "0.0.3"
     },
     "devDependencies": {
