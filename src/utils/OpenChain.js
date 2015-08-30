@@ -75,6 +75,23 @@ giant.postpone(giant, 'OpenChain', function () {
             },
 
             /**
+             * Retrieves the chain's links as an array.
+             * O(n) complexity.
+             * @returns {Array}
+             */
+            getLinks: function () {
+                var link = this.firstLink.nextLink,
+                    result = [];
+
+                while (link !== this.lastLink) {
+                    result.push(link);
+                    link = link.nextLink;
+                }
+
+                return result;
+            },
+
+            /**
              * Retrieves the values stored in the chain's links as an array.
              * O(n) complexity.
              * @returns {Array}
