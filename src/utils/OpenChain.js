@@ -48,6 +48,18 @@ giant.postpone(giant, 'OpenChain', function () {
             },
 
             /**
+             * Adds new link with the specified value at the end of the chain.
+             * @param {*} value
+             * @returns {giant.OpenChain}
+             */
+            pushValue: function (value) {
+                giant.ValueLink.create()
+                    .setValue(value)
+                    .addBefore(this.lastLink);
+                return this;
+            },
+
+            /**
              * Removes link from the end of the chain and returns removed link.
              * @returns {giant.Link}
              */
@@ -62,6 +74,18 @@ giant.postpone(giant, 'OpenChain', function () {
              */
             unshiftLink: function (link) {
                 link.addAfter(this.firstLink);
+                return this;
+            },
+
+            /**
+             * Adds new link with the specified value at the start of the chain.
+             * @param {*} value
+             * @returns {giant.OpenChain}
+             */
+            unshiftValue: function (value) {
+                giant.ValueLink.create()
+                    .setValue(value)
+                    .addBefore(this.lastLink);
                 return this;
             },
 

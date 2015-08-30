@@ -23,6 +23,13 @@
         strictEqual(chain.firstLink.nextLink, link, "should set pushed link in chain");
     });
 
+    test("Value push", function () {
+        var chain = giant.OpenChain.create();
+
+        strictEqual(chain.pushValue('foo'), chain, "should be chainable");
+        strictEqual(chain.firstLink.nextLink.value, 'foo', "should set pushed value in chain");
+    });
+
     test("Link pop", function () {
         var link = giant.ValueLink.create(),
             chain = giant.OpenChain.create()
@@ -38,6 +45,13 @@
 
         strictEqual(chain.unshiftLink(link), chain, "should be chainable");
         strictEqual(chain.firstLink.nextLink, link, "should set un-shifted link in chain");
+    });
+
+    test("Value unshift", function () {
+        var chain = giant.OpenChain.create();
+
+        strictEqual(chain.unshiftValue('foo'), chain, "should be chainable");
+        strictEqual(chain.lastLink.previousLink.value, 'foo', "should set pushed value in chain");
     });
 
     test("Link shift", function () {
