@@ -53,9 +53,8 @@ giant.postpone(giant, 'OpenChain', function () {
              * @returns {giant.OpenChain}
              */
             pushValue: function (value) {
-                giant.ValueLink.create()
-                    .setValue(value)
-                    .addBefore(this.lastLink);
+                this.pushLink(giant.ValueLink.create()
+                    .setValue(value));
                 return this;
             },
 
@@ -83,9 +82,8 @@ giant.postpone(giant, 'OpenChain', function () {
              * @returns {giant.OpenChain}
              */
             unshiftValue: function (value) {
-                giant.ValueLink.create()
-                    .setValue(value)
-                    .addBefore(this.lastLink);
+                this.unshiftLink(giant.ValueLink.create()
+                    .setValue(value));
                 return this;
             },
 
