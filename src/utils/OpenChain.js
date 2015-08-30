@@ -75,6 +75,31 @@ giant.postpone(giant, 'OpenChain', function () {
             },
 
             /**
+             * Iterates over links from first to last and calls the specified function
+             * passing the current link to it.
+             * @param {function} handler
+             * @param {object} [context=this]
+             * @returns {giant.OpenChain}
+             */
+            forEachLink: function (handler, context) {
+                giant
+                    .isFunction(handler, "Invalid callback function")
+                    .isObjectOptional(context, "Invalid context");
+
+                var link = this.firstLink.nextLink,
+                    i = 0;
+
+                while (link !== this.lastLink) {
+                    if (handler.call(context || this, link, i++) === false) {
+                        break;
+                    }
+                    link = link.nextLink;
+                }
+
+                return this;
+            },
+
+            /**
              * Retrieves the chain's links as an array.
              * O(n) complexity.
              * @returns {Array}

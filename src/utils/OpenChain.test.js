@@ -49,6 +49,30 @@
         strictEqual(chain.firstLink.nextLink, chain.lastLink, "should remove link from chain");
     });
 
+    test("Iterator", function () {
+        var chain = giant.OpenChain.create()
+                .pushLink(giant.ValueLink.create().setValue(3))
+                .unshiftLink(giant.ValueLink.create().setValue(2))
+                .unshiftLink(giant.ValueLink.create().setValue(1))
+                .pushLink(giant.ValueLink.create().setValue(4)),
+            results = [];
+
+        raises(function () {
+            chain.forEachLink();
+        }, "should raise exception on missing arguments");
+
+        chain.forEachLink(function (link, i) {
+            results.push([link, i]);
+        });
+
+        deepEqual(results, [
+            [chain.firstLink.nextLink, 0],
+            [chain.firstLink.nextLink.nextLink, 1],
+            [chain.firstLink.nextLink.nextLink.nextLink, 2],
+            [chain.lastLink.previousLink, 3]
+        ], "should call handler for all links");
+    });
+
     test("Links getter", function () {
         var chain = giant.OpenChain.create()
             .pushLink(giant.ValueLink.create().setValue(3))
