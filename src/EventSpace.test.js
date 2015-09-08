@@ -1,4 +1,4 @@
-/*global giant, module, test, expect, ok, equal, strictEqual, deepEqual, raises */
+/*global giant, Q, module, test, asyncTest, start, expect, ok, equal, strictEqual, deepEqual, raises */
 (function () {
     "use strict";
 
@@ -359,21 +359,75 @@
     });
 
     test("Calling handlers for event", function () {
-        expect(3);
+        expect(6);
 
         var eventSpace = giant.EventSpace.create()
-                .subscribeTo('eventA', 'test>event', function (event, data) {
-                    strictEqual(event, eventA, "should call handler with spawned event");
+                .subscribeTo('eventA', 'test>event'.toPath(), function (event, data) {
+                    equal(trace++, 1, "should call handler second");
+                    strictEqual(event, eventA, "should pass spawned event to handler");
                     strictEqual(data, event.payload, "should call handler with payload set on event");
                 }),
             eventA = eventSpace.spawnEvent('eventA'),
-            result;
+            result,
+            link = giant.Link.create(),
+            trace = 0;
+
+        giant.originalEventStack.addMocks({
+            pushEvent: function () {
+                equal(trace++, 0, "should push event first");
+                return link;
+            }
+        });
+
+        link.addMocks({
+            unlink: function () {
+                equal(trace, 2, "should unlink event last");
+            }
+        });
 
         eventA.originalPath = 'test>event'.toPath();
         eventA.currentPath = eventA.originalPath.clone();
 
         result = eventSpace.callHandlers(eventA);
+
+        giant.originalEventStack.removeMocks();
+
         strictEqual(result, 1, "should return number of handlers run");
+    });
+
+    asyncTest("Calling handler returning thenable", function () {
+        expect(3);
+
+        var eventSpace = giant.EventSpace.create()
+                .subscribeTo('eventA', 'test>event'.toPath(), function () {
+                    equal(trace++, 1, "should call handler second");
+                    var deferred = Q.defer();
+                    deferred.resolve();
+                    return deferred.promise;
+                }),
+            eventA = eventSpace.spawnEvent('eventA'),
+            link = giant.Link.create(),
+            trace = 0;
+
+        giant.originalEventStack.addMocks({
+            pushEvent: function () {
+                equal(trace++, 0, "should push event first");
+                return link;
+            }
+        });
+
+        link.addMocks({
+            unlink: function () {
+                equal(trace, 2, "should unlink event last");
+                start();
+            }
+        });
+
+        eventA.originalPath = 'test>event'.toPath();
+        eventA.currentPath = eventA.originalPath.clone();
+        eventSpace.callHandlers(eventA);
+
+        giant.originalEventStack.removeMocks();
     });
 
     test("Calling handlers for invalid event", function () {

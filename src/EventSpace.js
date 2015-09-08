@@ -224,17 +224,36 @@ giant.postpone(giant, 'EventSpace', function () {
             callHandlers: function (event) {
                 var handlersPath = [event.currentPath.toString(), event.eventName].toPath(),
                     handlers = this.eventRegistry.getNode(handlersPath),
-                    i = 0, handler;
+                    handlerCount,
+                    i = 0, link, unlink, handler, result;
 
                 if (handlers && handlers.length) {
                     // making local copy of handlers
                     // in case any of these handlers end up modifying the subscription registry
                     handlers = handlers.concat();
+                    handlerCount = handlers.length;
 
-                    for (; i < handlers.length; i++) {
+                    for (; i < handlerCount; i++) {
                         handler = handlers[i];
+
+                        // pushing original event
+                        link = giant.originalEventStack.pushEvent(event);
+
                         // calling handler, passing event and payload
-                        if (handler.call(this, event, event.payload) === false) {
+                        // TODO: Do not pass payload.
+                        result = handler.call(this, event, event.payload);
+
+                        if (result && typeof result.then === 'function') {
+                            // handler returned a thenable
+                            unlink = link.unlink.bind(link);
+                            result.then(unlink, unlink);
+                        } else {
+                            // handler returned non-thenable
+                            // unlinking immediately
+                            link.unlink();
+                        }
+
+                        if (result === false) {
                             // stopping iteration when handler returns false
                             // TODO: Add .stopPropagation() API to event.
                             return false;
@@ -286,7 +305,7 @@ giant.postpone(giant, 'EventSpace', function () {
 
         isEventSpaceOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                   giant.EventSpace.isPrototypeOf(expr);
+                giant.EventSpace.isPrototypeOf(expr);
         }
     });
 }());
