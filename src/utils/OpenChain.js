@@ -64,7 +64,7 @@ giant.postpone(giant, 'OpenChain', function () {
              */
             popLink: function () {
                 return this.lastLink.previousLink
-                    .unLink();
+                    .unlink();
             },
 
             /**
@@ -93,7 +93,7 @@ giant.postpone(giant, 'OpenChain', function () {
              */
             shiftLink: function () {
                 return this.firstLink.nextLink
-                    .unLink();
+                    .unlink();
             },
 
             /**

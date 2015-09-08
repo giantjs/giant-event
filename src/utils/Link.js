@@ -94,7 +94,7 @@ giant.postpone(giant, 'Link', function () {
              * Removes link from the chain.
              * @returns {giant.Link}
              */
-            unLink: function () {
+            unlink: function () {
                 var nextLink = this.nextLink,
                     previousLink = this.previousLink;
 

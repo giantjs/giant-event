@@ -49,7 +49,7 @@
         strictEqual(spawnedEvent.originalEvent, giant.originalEventStack.getLastEvent(),
             "should set original event");
 
-        link.unLink();
+        link.unlink();
         giant.deleteNextPayloadItem('eventA', 'foo');
     });
 

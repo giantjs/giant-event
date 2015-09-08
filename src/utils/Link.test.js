@@ -79,7 +79,7 @@
             beforeLink = giant.Link.create()
                 .addBefore(link);
 
-        strictEqual(link.unLink(), link, "should be chainable");
+        strictEqual(link.unlink(), link, "should be chainable");
         ok(!link.nextLink, "should remove nextLink");
         ok(!link.previousLink, "should remove previousLink");
         strictEqual(afterLink.previousLink, beforeLink, "should set previousLink on old next link");
@@ -89,7 +89,7 @@
     test("Unlinking lone link", function () {
         var link = giant.Link.create();
 
-        link.unLink();
+        link.unlink();
         ok(!link.nextLink, "should leave nextLink unaffected");
         ok(!link.previousLink, "should leave previousLink unaffected");
     });

@@ -31,7 +31,7 @@ giant.postpone(giant, 'EventStack', function () {
             },
 
             /**
-             * Adds an event to the stack. To remove the event from the stack, call .unLink() on the returned giant.ValueLink instance.
+             * Adds an event to the stack. To remove the event from the stack, call .unlink() on the returned giant.ValueLink instance.
              * @param {giant.Event|*} event
              * @returns {giant.ValueLink}
              */
