@@ -81,10 +81,8 @@ giant.postpone(giant, 'Event', function () {
 
                 /**
                  * Giant event or DOM event that led to triggering the current event.
-                 * In most cases, this property is not set directly, but through
-                 * giant.pushOriginalEvent()
+                 * In most cases, this property is set automatically.
                  * @type {giant.Event|*}
-                 * @see giant.pushOriginalEvent
                  */
                 this.originalEvent = undefined;
 
