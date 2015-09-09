@@ -18,7 +18,8 @@
         "giant-assertion": "0.0.5",
         "giant-data"     : "0.0.5",
         "giant-namespace": "0.0.5",
-        "giant-oop"      : "0.0.5"
+        "giant-oop"      : "0.0.5",
+        "giant-utils"    : "0.0.5"
     },
     "devDependencies": {
         "QUnitAdapter"        : "https://dl.dropboxusercontent.com/u/9258903/packages/QUnitAdapter-0.1.0.tgz",
