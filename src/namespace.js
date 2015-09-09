@@ -7,4 +7,5 @@ if (typeof require === 'function') {
     require('giant-assertion');
     require('giant-oop');
     require('giant-data');
+    require('giant-utils');
 }
