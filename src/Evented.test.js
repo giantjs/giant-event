@@ -38,7 +38,7 @@
     });
 
     test("Relative event path setter", function () {
-        raises(function () {
+        throws(function () {
             EventedStaticClass.create('foo>bar'.toPath());
         }, "should raise exception on path not relative to static path");
 

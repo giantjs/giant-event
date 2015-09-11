@@ -7,11 +7,11 @@
     var eventSpace = giant.EventSpace.create();
 
     test("Instantiation", function () {
-        raises(function () {
+        throws(function () {
             giant.Event.create();
         }, "should raise exception on invalid event name argument");
 
-        raises(function () {
+        throws(function () {
             giant.Event.create('foo');
         }, "should raise exception on invalid event space argument");
 
@@ -98,7 +98,7 @@
     test("Setting target path", function () {
         var event = giant.Event.create('testEvent', eventSpace);
 
-        raises(function () {
+        throws(function () {
             event.setTargetPath('test>path');
         }, "should raise exception on invalid path");
 
@@ -162,7 +162,7 @@
             handledFlags = [],
             i = 0;
 
-        raises(function () {
+        throws(function () {
             event.triggerSync('foo');
         }, "should raise exception on invalid target path");
 
@@ -287,7 +287,7 @@
                 .setOriginalEvent(originalEvent)
                 .setPayloadItem('foo', 'bar');
 
-        raises(function () {
+        throws(function () {
             event.broadcastSync('foo');
         }, "should raise exception on invalid broadcast path");
 

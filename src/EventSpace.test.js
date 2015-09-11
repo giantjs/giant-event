@@ -59,7 +59,7 @@
         function handler1() {
         }
 
-        raises(function () {
+        throws(function () {
             eventSpace.subscribeTo('eventA', 'test>event>path'.toPath(), 123);
         }, "should raise exception on invalid handler");
 
@@ -302,11 +302,11 @@
                 "should call handler with originalPath set on event");
         }
 
-        raises(function () {
+        throws(function () {
             eventSpace.delegateSubscriptionTo('eventA', 'test>event'.toPath(), 'unrelated>path'.toPath(), handler);
         }, "should raise exception on delegate path not relative to capture path");
 
-        raises(function () {
+        throws(function () {
             eventSpace.delegateSubscriptionTo('eventA', 'test>event'.toPath(), 'test>event>path'.toPath(), 'non-function');
         }, "should raise exception on invalid event handler");
 
@@ -329,7 +329,7 @@
                 "should call handler with originalPath set on event");
         }
 
-        raises(function () {
+        throws(function () {
             eventSpace.delegateSubscriptionTo('eventA', 'test>event'.toPath(), 'test>|>path'.toPath(), handler);
         }, "should raise exception on delegate query not relative to capture path");
 
