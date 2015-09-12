@@ -11,7 +11,7 @@ giant.postpone(giant, 'Event', function () {
      * @function
      * @param {string} eventName Event name
      * @param {giant.EventSpace} eventSpace Event space associated with event
-     * @return {giant.Event}
+     * @returns {giant.Event}
      */
 
     /**
@@ -26,7 +26,7 @@ giant.postpone(giant, 'Event', function () {
             /**
              * Creates a new event instance and prepares it to be triggered.
              * @param {giant.Path} targetPath
-             * @return {giant.Event}
+             * @returns {giant.Event}
              * @private
              */
             _spawnMainBroadcastEvent: function (targetPath) {
@@ -40,7 +40,7 @@ giant.postpone(giant, 'Event', function () {
              * Broadcast events do not bubble.
              * @param {giant.Path} broadcastPath
              * @param {giant.Path} targetPath
-             * @return {giant.Event}
+             * @returns {giant.Event}
              * @private
              */
             _spawnBroadcastEvent: function (broadcastPath, targetPath) {
@@ -138,7 +138,7 @@ giant.postpone(giant, 'Event', function () {
              * the one specified by the argument.
              * Override in subclasses to clone additional properties.
              * @param {giant.Path} [currentPath]
-             * @return {giant.Event}
+             * @returns {giant.Event}
              */
             clone: function (currentPath) {
                 giant.isPathOptional(currentPath, "Invalid current event path");
@@ -167,7 +167,7 @@ giant.postpone(giant, 'Event', function () {
             /**
              * Sets whether the event can bubble
              * @param {boolean} value Bubbling flag
-             * @return {giant.Event}
+             * @returns {giant.Event}
              */
             allowBubbling: function (value) {
                 giant.isBoolean(value, "Invalid bubbling flag");
@@ -228,7 +228,7 @@ giant.postpone(giant, 'Event', function () {
             /**
              * Assigns paths to the event.
              * @param {giant.Path} targetPath Path on which to trigger event.
-             * @return {giant.Event}
+             * @returns {giant.Event}
              */
             setTargetPath: function (targetPath) {
                 giant.isPath(targetPath, "Invalid target path");
@@ -240,7 +240,7 @@ giant.postpone(giant, 'Event', function () {
             /**
              * Assigns a broadcast path to the event.
              * @param {giant.Path} broadcastPath Path associated with broadcasting.
-             * @return {giant.Event}
+             * @returns {giant.Event}
              */
             setBroadcastPath: function (broadcastPath) {
                 giant.isPath(broadcastPath, "Invalid broadcast path");
@@ -264,7 +264,7 @@ giant.postpone(giant, 'Event', function () {
              * User payloads are usually set via giant.setNextPayloadItem.
              * @param {string} payloadName
              * @param {*} payloadValue
-             * @return {giant.Event}
+             * @returns {giant.Event}
              * @see giant.EventSpace#setNextPayloadItem
              */
             setPayloadItem: function (payloadName, payloadValue) {
@@ -277,7 +277,7 @@ giant.postpone(giant, 'Event', function () {
              * An event may carry multiple payload items set by multiple sources.
              * User payloads are usually set via giant.setNextPayloadItems.
              * @param {object} payloadItems
-             * @return {giant.Event}
+             * @returns {giant.Event}
              */
             setPayloadItems: function (payloadItems) {
                 var payload = this.payload,
@@ -298,7 +298,7 @@ giant.postpone(giant, 'Event', function () {
              * between stages of bubbling, hence holding on to an event instance in an async handler
              * may not reflect the current paths and payload carried.
              * @param {giant.Path} [targetPath] Path on which to trigger event.
-             * @return {giant.Event}
+             * @returns {giant.Event}
              */
             triggerSync: function (targetPath) {
                 giant.isPathOptional(targetPath, "Invalid target path");
@@ -345,7 +345,7 @@ giant.postpone(giant, 'Event', function () {
              * on the specified broadcast path. It is necessary for delegates to react to
              * broadcasts.
              * @param {giant.Path} [broadcastPath] Target root for broadcast.
-             * @return {giant.Event}
+             * @returns {giant.Event}
              */
             broadcastSync: function (broadcastPath) {
                 giant.isPathOptional(broadcastPath, "Invalid broadcast path");

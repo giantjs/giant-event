@@ -78,7 +78,7 @@ giant.postpone(giant, 'Evented', function () {
              * as the target path. Returned event may be triggered without specifying a target path.
              * Current eventSpace and eventPath properties must not be undefined.
              * @param {string} eventName
-             * @return {giant.Event}
+             * @returns {giant.Event}
              */
             spawnEvent: function (eventName) {
                 return this.eventSpace.spawnEvent(eventName)
@@ -133,7 +133,7 @@ giant.postpone(giant, 'Evented', function () {
              * @param {string} eventName Name of event to be triggered.
              * @param {function} handler Event handler function that is called when the event
              * is triggered on (or bubbles to) the specified path.
-             * @return {giant.Evented}
+             * @returns {giant.Evented}
              */
             subscribeTo: function (eventName, handler) {
                 this.eventSpace.subscribeTo(eventName, this.eventPath, handler);
@@ -145,7 +145,7 @@ giant.postpone(giant, 'Evented', function () {
              * Unsubscribes from event.
              * @param {string} [eventName] Name of event to be triggered.
              * @param {function} [handler] Event handler function
-             * @return {giant.Evented}
+             * @returns {giant.Evented}
              */
             unsubscribeFrom: function (eventName, handler) {
                 this.eventSpace.unsubscribeFrom(eventName, this.eventPath, handler);
@@ -164,7 +164,7 @@ giant.postpone(giant, 'Evented', function () {
              * @param {string} eventName Name of event to be triggered.
              * @param {function} handler Event handler function that is called when the event
              * is triggered on (or bubbles to) the specified path.
-             * @return {giant.Evented}
+             * @returns {giant.Evented}
              */
             subscribeToUntilTriggered: function (eventName, handler) {
                 var oneHandler = this.eventSpace.subscribeToUntilTriggered(eventName, this.eventPath, handler);
@@ -178,7 +178,7 @@ giant.postpone(giant, 'Evented', function () {
              * @param {string} eventName
              * @param {giant.Path} delegatePath Path we're listening to. (Could be derived, eg. Query)
              * @param {function} handler Event handler function
-             * @return {giant.Evented}
+             * @returns {giant.Evented}
              */
             delegateSubscriptionTo: function (eventName, delegatePath, handler) {
                 var delegateHandler = this.eventSpace.delegateSubscriptionTo(eventName, this.eventPath, delegatePath, handler);
@@ -190,7 +190,7 @@ giant.postpone(giant, 'Evented', function () {
              * Shorthand for **triggering** an event in the event space
              * associated with the instance / class.
              * @param {string} eventName
-             * @return {giant.Evented}
+             * @returns {giant.Evented}
              */
             triggerSync: function (eventName) {
                 this.spawnEvent(eventName)
@@ -202,7 +202,7 @@ giant.postpone(giant, 'Evented', function () {
              * Shorthand for **broadcasting** an event in the event space
              * associated with the instance / class.
              * @param {string} eventName
-             * @return {giant.Evented}
+             * @returns {giant.Evented}
              */
             broadcastSync: function (eventName) {
                 this.spawnEvent(eventName)

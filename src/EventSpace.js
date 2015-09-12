@@ -9,7 +9,7 @@ giant.postpone(giant, 'EventSpace', function () {
      * Instantiates an EventSpace.
      * @name giant.EventSpace.create
      * @function
-     * @return {giant.EventSpace}
+     * @returns {giant.EventSpace}
      */
 
     /**
@@ -23,7 +23,7 @@ giant.postpone(giant, 'EventSpace', function () {
         .addPrivateMethods(/** @lends giant.EventSpace */{
             /**
              * Generates a stub for event handlers. (An empty array)
-             * @return {Array}
+             * @returns {Array}
              * @private
              */
             _generateHandlersStub: function () {
@@ -64,7 +64,7 @@ giant.postpone(giant, 'EventSpace', function () {
 
             /**
              * @param {string} eventName
-             * @return {giant.Event}
+             * @returns {giant.Event}
              */
             spawnEvent: function (eventName) {
                 var event = giant.Event.create(eventName, this);
@@ -79,7 +79,7 @@ giant.postpone(giant, 'EventSpace', function () {
              * @param {giant.Path} eventPath Path we're listening to
              * @param {function} handler Event handler function that is called when the event
              * is triggered on (or bubbles to) the specified path.
-             * @return {giant.EventSpace}
+             * @returns {giant.EventSpace}
              */
             subscribeTo: function (eventName, eventPath, handler) {
                 giant.isFunction(handler, "Invalid event handler function");
@@ -105,7 +105,7 @@ giant.postpone(giant, 'EventSpace', function () {
              * @param {string} [eventName] Name of event to be triggered.
              * @param {giant.Path} [eventPath] Path we're listening to
              * @param {function} [handler] Event handler function
-             * @return {giant.EventSpace}
+             * @returns {giant.EventSpace}
              */
             unsubscribeFrom: function (eventName, eventPath, handler) {
                 giant.isFunctionOptional(handler, "Invalid event handler function");
@@ -153,7 +153,7 @@ giant.postpone(giant, 'EventSpace', function () {
              * @param {giant.Path} eventPath Path we're listening to
              * @param {function} handler Event handler function that is called when the event
              * is triggered on (or bubbles to) the specified path.
-             * @return {function} Event handler actually subscribed. Use this for unsubscribing.
+             * @returns {function} Event handler actually subscribed. Use this for unsubscribing.
              */
             subscribeToUntilTriggered: function (eventName, eventPath, handler) {
                 /**
@@ -161,7 +161,7 @@ giant.postpone(giant, 'EventSpace', function () {
                  * after the first trigger.
                  * @param {giant.Event} event
                  * @param {*} data
-                 * @return {*} Whatever the user-defined handler returns (possibly a `false`)
+                 * @returns {*} Whatever the user-defined handler returns (possibly a `false`)
                  */
                 function oneHandler(event, data) {
                     /*jshint validthis: true */
@@ -182,7 +182,7 @@ giant.postpone(giant, 'EventSpace', function () {
              * @param {giant.Path} capturePath Path where the event will actually subscribe
              * @param {giant.Path} delegatePath Path we're listening to. (Could be derived, eg. Query)
              * @param {function} handler Event handler function
-             * @return {function} Event handler actually subscribed. Use this for unsubscribing.
+             * @returns {function} Event handler actually subscribed. Use this for unsubscribing.
              */
             delegateSubscriptionTo: function (eventName, capturePath, delegatePath, handler) {
                 giant
@@ -193,7 +193,7 @@ giant.postpone(giant, 'EventSpace', function () {
                  * Handler wrapper for subscribing delegates
                  * @param {giant.Event} event Event object passed down by the triggering process
                  * @param {*} data Custom event data
-                 * @return {*} Whatever the user-defined handler returns (possibly a `false`)
+                 * @returns {*} Whatever the user-defined handler returns (possibly a `false`)
                  */
                 function delegateHandler(event, data) {
                     /*jshint validthis: true */
@@ -218,7 +218,7 @@ giant.postpone(giant, 'EventSpace', function () {
              * Calls handlers associated with an event name and path.
              * Handlers are assumed to be synchronous.
              * @param {giant.Event} event
-             * @return {number|boolean} Number of handlers processed, or false when one handler returned false.
+             * @returns {number|boolean} Number of handlers processed, or false when one handler returned false.
              * @see giant.Event#triggerSync
              */
             callHandlers: function (event) {
@@ -268,7 +268,7 @@ giant.postpone(giant, 'EventSpace', function () {
              * Retrieves subscribed paths that are relative to the specified path.
              * @param {string} eventName
              * @param {giant.Path} path
-             * @return {giant.PathCollection} Collection of paths relative to (not including) `path`
+             * @returns {giant.PathCollection} Collection of paths relative to (not including) `path`
              * Question is which lib/class should delegate the method.
              */
             getPathsRelativeTo: function (eventName, path) {

@@ -6,7 +6,7 @@ giant.postpone(giant, 'PathCollection', function () {
      * @name giant.PathCollection.create
      * @function
      * @param {object} [items] Initial contents.
-     * @return {giant.PathCollection}
+     * @returns {giant.PathCollection}
      */
 
     /**

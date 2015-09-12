@@ -6,7 +6,7 @@ giant.postpone(giant, 'EventCollection', function () {
      * @name giant.EventCollection.create
      * @function
      * @param {object} [items] Initial contents.
-     * @return {giant.EventCollection}
+     * @returns {giant.EventCollection}
      */
 
     /**
