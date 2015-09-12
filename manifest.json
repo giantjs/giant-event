@@ -1,0 +1,23 @@
+{
+  "main": {
+    "assets": {
+      "js": [
+        "src/namespace.js",
+        "src/interfaces/EventSpawner.def.js",
+        "src/interfaces/EventSource.def.js",
+        "src/interfaces/EventTarget.def.js",
+        "src/PathCollection.def.js",
+        "src/Event.def.js",
+        "src/EventCollection.def.js",
+        "src/EventSpace.def.js",
+        "src/Evented.def.js",
+        "src/EventStack.def.js",
+        "src/PayloadStore.def.js",
+        "src/globals/originalEventStack.def.js",
+        "src/globals/nextPayloadStore.def.js",
+        "src/globals/eventSpace.def.js",
+        "src/exports.js"
+      ]
+    }
+  }
+}

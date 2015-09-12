@@ -2,32 +2,47 @@
 module.exports = function (grunt) {
     "use strict";
 
-    var params = {
-        files: [
-            'src/namespace.js',
-            'src/interfaces/EventSpawner.js',
-            'src/interfaces/EventSource.js',
-            'src/interfaces/EventTarget.js',
-            'src/PathCollection.js',
-            'src/Event.js',
-            'src/EventCollection.js',
-            'src/EventSpace.js',
-            'src/Evented.js',
-            'src/EventStack.js',
-            'src/PayloadStore.js',
-            'src/globals/originalEventStack.js',
-            'src/globals/nextPayloadStore.js',
-            'src/globals/eventSpace.js',
-            'src/exports.js'
-        ],
+    var grocer = require('grocer'),
+        packageNode = require('./package.json'),
+        manifestNode = require('./manifest.json'),
+        manifest = grocer.Manifest.create(manifestNode),
+        multiTasks = [].toMultiTaskCollection(),
+        gruntTasks = [].toGruntTaskCollection();
 
-        test: [
-            'src/jsTestDriver.conf'
-        ],
+    grocer.GruntProxy.create()
+        .setGruntObject(grunt);
 
-        globals: {}
-    };
+    'concat'
+        .toMultiTask({
+            'default': {
+                src : manifest.getAssets('js')
+                    .getAssetNames(),
+                dest: 'lib/' + packageNode.name + '.js'
+            }
+        })
+        .setPackageName('grunt-contrib-concat')
+        .addToCollection(multiTasks);
 
-    // invoking common grunt process
-    require('common-gruntfile')(grunt, params);
+    'karma'
+        .toMultiTask({
+            'default': {
+                configFile: 'karma.conf.js',
+                singleRun : true
+            }
+        })
+        .setPackageName('grunt-karma')
+        .addToCollection(multiTasks);
+
+    'build'
+        .toAliasTask()
+        .addSubTasks('karma', 'concat')
+        .addToCollection(gruntTasks);
+
+    // registering tasks
+    multiTasks.toGruntConfig()
+        .applyConfig()
+        .getAliasTasksGroupedByTarget()
+        .mergeWith(multiTasks.toGruntTaskCollection())
+        .mergeWith(gruntTasks)
+        .applyTask();
 };
