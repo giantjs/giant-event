@@ -25,7 +25,7 @@
     "q": "^1.4.0"
   },
   "files": [
-    "giant-event.js"
+    "lib"
   ],
-  "main": "giant-event.js"
+  "main": "lib/giant-event.js"
 }
