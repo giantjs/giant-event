@@ -222,7 +222,7 @@ giant.postpone(giant, 'Event', function () {
             /**
              * Retrieves event from chain of original events by the name of the event.
              * @param {string} eventName
-             * @returns {evan.Event|*} Original event matching the specified name.
+             * @returns {giant.Event|*} Original event matching the specified name.
              */
             getOriginalEventByName: function (eventName) {
                 var that = this.originalEvent,

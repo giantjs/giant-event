@@ -89,10 +89,10 @@
     });
 
     test("Getting original event by name", function () {
-        var event1 = evan.Event.create('foo', evan.EventSpace.create()),
-            event2 = evan.Event.create('bar', evan.EventSpace.create())
+        var event1 = giant.Event.create('foo', giant.EventSpace.create()),
+            event2 = giant.Event.create('bar', giant.EventSpace.create())
                 .setOriginalEvent(event1),
-            event3 = evan.Event.create('baz', evan.EventSpace.create())
+            event3 = giant.Event.create('baz', giant.EventSpace.create())
                 .setOriginalEvent(event2);
 
         strictEqual(event3.getOriginalEventByName('foo'), event1);
