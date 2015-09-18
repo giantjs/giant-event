@@ -1,6 +1,6 @@
 {
     "name"           : "giant-event",
-    "version"        : "0.0.5",
+    "version"        : "0.0.6",
     "description"    : "Eventing module for Giant",
     "keywords"       : [
         "custom",
@@ -15,10 +15,10 @@
         "url" : "git@github.com:giantjs/giant-event.git"
     },
     "dependencies"   : {
-        "giant-assertion": "0.0.5",
-        "giant-data"     : "0.0.5",
-        "giant-namespace": "0.0.5",
-        "giant-oop"      : "0.0.5"
+        "giant-assertion": "0.0.6",
+        "giant-data"     : "0.0.6",
+        "giant-namespace": "0.0.6",
+        "giant-oop"      : "0.0.6"
     },
     "devDependencies": {
         "QUnitAdapter"        : "https://dl.dropboxusercontent.com/u/9258903/packages/QUnitAdapter-0.1.0.tgz",
