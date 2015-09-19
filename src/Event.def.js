@@ -187,6 +187,7 @@ giant.postpone(giant, 'Event', function () {
 
             /**
              * Retrieves event from chain of original events by type.
+             * @param {function|giant.Base} eventType
              * @returns {giant.Event|*} Original event matching the specified type.
              */
             getOriginalEventByType: function (eventType) {
@@ -210,6 +211,27 @@ giant.postpone(giant, 'Event', function () {
                         } else {
                             that = that.originalEvent;
                         }
+                    }
+                }
+
+                return result;
+            },
+
+            /**
+             * Retrieves event from chain of original events by the name of the event.
+             * @param {string} eventName
+             * @returns {giant.Event|*} Original event matching the specified name.
+             */
+            getOriginalEventByName: function (eventName) {
+                var that = this.originalEvent,
+                    result;
+
+                while (that) {
+                    if (that.eventName === eventName) {
+                        result = that;
+                        break;
+                    } else {
+                        that = that.originalEvent;
                     }
                 }
 
@@ -312,7 +334,6 @@ giant.postpone(giant, 'Event', function () {
                     eventSpace = this.eventSpace,
                     handlerCount;
 
-
                 if (!this.canBubble || this.originalPath.isA(giant.Query)) {
                     // event can't bubble because it's not allowed to
                     // or because path is a query and queries shouldn't bubble
@@ -387,7 +408,7 @@ giant.postpone(giant, 'Event', function () {
         /** @param {giant.Event} expr */
         isEventOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                   giant.Event.isBaseOf(expr);
+                giant.Event.isBaseOf(expr);
         }
     });
 }());

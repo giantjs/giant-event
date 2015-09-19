@@ -88,6 +88,18 @@
         strictEqual(event.getOriginalEventByType(giant.Event), event3);
     });
 
+    test("Getting original event by name", function () {
+        var event1 = giant.Event.create('foo', giant.EventSpace.create()),
+            event2 = giant.Event.create('bar', giant.EventSpace.create())
+                .setOriginalEvent(event1),
+            event3 = giant.Event.create('baz', giant.EventSpace.create())
+                .setOriginalEvent(event2);
+
+        strictEqual(event3.getOriginalEventByName('foo'), event1);
+        strictEqual(event3.getOriginalEventByName('bar'), event2);
+        equal(typeof event3.getOriginalEventByName('baz'), 'undefined');
+    });
+
     test("Setting default prevention flag", function () {
         var event = giant.Event.create('testEvent', eventSpace);
 
