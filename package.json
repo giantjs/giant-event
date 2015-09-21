@@ -1,6 +1,6 @@
 {
   "name": "giant-event",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Eventing module for Giant",
   "keywords": [
     "custom",
@@ -15,11 +15,11 @@
     "url": "git@github.com:giantjs/giant-event.git"
   },
   "dependencies": {
-    "giant-assertion": "0.0.6",
-    "giant-data": "0.0.6",
-    "giant-namespace": "0.0.6",
-    "giant-oop": "0.0.6",
-    "giant-utils": "0.0.6"
+    "giant-assertion": "0.0.7",
+    "giant-data": "0.0.7",
+    "giant-namespace": "0.0.7",
+    "giant-oop": "0.0.7",
+    "giant-utils": "0.0.7"
   },
   "devDependencies": {
     "grocer": "^0.5.0",
