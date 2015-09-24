@@ -93,7 +93,7 @@ giant.postpone(giant, 'Evented', function () {
              * @memberOf {giant.Evented}
              */
             setEventSpace: function (eventSpace) {
-                giant.isEventSpace(eventSpace, "Invalid event space");
+                $assertion.isEventSpace(eventSpace, "Invalid event space");
                 this.eventSpace = eventSpace;
                 return this;
             },
@@ -108,7 +108,7 @@ giant.postpone(giant, 'Evented', function () {
                 var baseEventPath = this.getBase().eventPath,
                     subscriptionRegistry = this.subscriptionRegistry;
 
-                giant
+                $assertion
                     .isPath(eventPath, "Invalid event path")
                     .assert(
                         !baseEventPath || eventPath.isRelativeTo(baseEventPath),

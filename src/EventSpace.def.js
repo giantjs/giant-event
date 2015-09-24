@@ -82,7 +82,7 @@ giant.postpone(giant, 'EventSpace', function () {
              * @returns {giant.EventSpace}
              */
             subscribeTo: function (eventName, eventPath, handler) {
-                giant.isFunction(handler, "Invalid event handler function");
+                $assertion.isFunction(handler, "Invalid event handler function");
 
                 var eventRegistry = this.eventRegistry,
                     eventPathString = eventPath.toString(),
@@ -108,7 +108,7 @@ giant.postpone(giant, 'EventSpace', function () {
              * @returns {giant.EventSpace}
              */
             unsubscribeFrom: function (eventName, eventPath, handler) {
-                giant.isFunctionOptional(handler, "Invalid event handler function");
+                $assertion.isFunctionOptional(handler, "Invalid event handler function");
 
                 var eventRegistry = this.eventRegistry,
                     handlers,
@@ -185,7 +185,7 @@ giant.postpone(giant, 'EventSpace', function () {
              * @returns {function} Event handler actually subscribed. Use this for unsubscribing.
              */
             delegateSubscriptionTo: function (eventName, capturePath, delegatePath, handler) {
-                giant
+                $assertion
                     .assert(delegatePath.isRelativeTo(capturePath), "Delegate path is not relative to capture path")
                     .isFunction(handler, "Invalid event handler function");
 
@@ -298,7 +298,7 @@ giant.postpone(giant, 'EventSpace', function () {
 (function () {
     "use strict";
 
-    giant.addTypes(/** @lends giant */{
+    $assertion.addTypes(/** @lends giant */{
         isEventSpace: function (expr) {
             return giant.EventSpace.isPrototypeOf(expr);
         },

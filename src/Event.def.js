@@ -57,7 +57,7 @@ giant.postpone(giant, 'Event', function () {
              * @ignore
              */
             init: function (eventName, eventSpace) {
-                giant
+                $assertion
                     .isString(eventName, "Invalid event name")
                     .isEventSpace(eventSpace, "Invalid event space");
 
@@ -141,7 +141,7 @@ giant.postpone(giant, 'Event', function () {
              * @returns {giant.Event}
              */
             clone: function (currentPath) {
-                giant.isPathOptional(currentPath, "Invalid current event path");
+                $assertion.isPathOptional(currentPath, "Invalid current event path");
 
                 var result = this.getBase().create(this.eventName, this.eventSpace);
 
@@ -170,7 +170,7 @@ giant.postpone(giant, 'Event', function () {
              * @returns {giant.Event}
              */
             allowBubbling: function (value) {
-                giant.isBoolean(value, "Invalid bubbling flag");
+                $assertion.isBoolean(value, "Invalid bubbling flag");
                 this.canBubble = value;
                 return this;
             },
@@ -253,7 +253,7 @@ giant.postpone(giant, 'Event', function () {
              * @returns {giant.Event}
              */
             setTargetPath: function (targetPath) {
-                giant.isPath(targetPath, "Invalid target path");
+                $assertion.isPath(targetPath, "Invalid target path");
                 this.originalPath = targetPath;
                 this.currentPath = targetPath.clone();
                 return this;
@@ -265,7 +265,7 @@ giant.postpone(giant, 'Event', function () {
              * @returns {giant.Event}
              */
             setBroadcastPath: function (broadcastPath) {
-                giant.isPath(broadcastPath, "Invalid broadcast path");
+                $assertion.isPath(broadcastPath, "Invalid broadcast path");
                 this.broadcastPath = broadcastPath;
                 return this;
             },
@@ -323,7 +323,7 @@ giant.postpone(giant, 'Event', function () {
              * @returns {giant.Event}
              */
             triggerSync: function (targetPath) {
-                giant.isPathOptional(targetPath, "Invalid target path");
+                $assertion.isPathOptional(targetPath, "Invalid target path");
 
                 // preparing event for trigger
                 if (targetPath) {
@@ -369,7 +369,7 @@ giant.postpone(giant, 'Event', function () {
              * @returns {giant.Event}
              */
             broadcastSync: function (broadcastPath) {
-                giant.isPathOptional(broadcastPath, "Invalid broadcast path");
+                $assertion.isPathOptional(broadcastPath, "Invalid broadcast path");
 
                 // defaulting to current path in case broadcast path was omitted
                 broadcastPath = broadcastPath || this.currentPath;
@@ -399,7 +399,7 @@ giant.postpone(giant, 'Event', function () {
 (function () {
     "use strict";
 
-    giant.addTypes(/** @lends giant */{
+    $assertion.addTypes(/** @lends giant */{
         /** @param {giant.Event} expr */
         isEvent: function (expr) {
             return giant.Event.isBaseOf(expr);
