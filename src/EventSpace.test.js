@@ -38,7 +38,7 @@
             link,
             spawnedEvent;
 
-        link = giant.originalEventStack.pushEvent(giant.Event.create('foo', eventSpace));
+        link = giant.pushOriginalEvent(giant.Event.create('foo', eventSpace));
         giant.setNextPayloadItem('eventA', 'foo', {});
 
         spawnedEvent = eventSpace.spawnEvent('eventA');

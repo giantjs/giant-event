@@ -237,7 +237,7 @@ giant.postpone(giant, 'EventSpace', function () {
                         handler = handlers[i];
 
                         // pushing original event
-                        link = giant.originalEventStack.pushEvent(event);
+                        link = giant.pushOriginalEvent(event);
 
                         // calling handler, passing event and payload
                         // TODO: Do not pass payload.

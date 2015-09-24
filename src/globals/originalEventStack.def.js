@@ -8,3 +8,16 @@ giant.postpone(giant, 'originalEventStack', function () {
      */
     giant.originalEventStack = giant.EventStack.create();
 });
+
+giant.postpone(giant, 'pushOriginalEvent', function () {
+    "use strict";
+
+    /**
+     * Adds an original event to the stack.
+     * @param {giant.Event|*} originalEvent
+     * @returns {giant.ValueLink}
+     */
+    giant.pushOriginalEvent = function (originalEvent) {
+        return giant.originalEventStack.pushEvent(originalEvent);
+    };
+});
