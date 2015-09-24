@@ -1,5 +1,5 @@
 /*jshint node:true */
-/*global giant */
+/*global $event */
 if (typeof module === 'object') {
-    module.exports = giant;
+    module.exports = $event;
 }

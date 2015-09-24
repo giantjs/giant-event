@@ -1,17 +1,17 @@
-/*global giant */
+/*global $event */
 (function () {
     "use strict";
 
     module("PayloadStore");
 
     test("Instantiation", function () {
-        var payloadStore = giant.PayloadStore.create(this);
+        var payloadStore = $event.PayloadStore.create(this);
 
         ok(payloadStore.payloads.isA($data.Tree), "should add payloads property");
     });
 
     test("Setting single payload item", function () {
-        var payloadStore = giant.PayloadStore.create(this);
+        var payloadStore = $event.PayloadStore.create(this);
 
         strictEqual(payloadStore.setPayloadItem('foo', 'bar', 'baz'), payloadStore,
             "should be chainable");
@@ -24,7 +24,7 @@
     });
 
     test("Setting multiple payload items", function () {
-        var payloadStore = giant.PayloadStore.create(this);
+        var payloadStore = $event.PayloadStore.create(this);
 
         strictEqual(payloadStore.setPayloadItems('foo', {
             'bar'  : 'baz',
@@ -40,7 +40,7 @@
     });
 
     test("Deleting single payload item", function () {
-        var payloadStore = giant.PayloadStore.create(this)
+        var payloadStore = $event.PayloadStore.create(this)
             .setPayloadItems('foo', {
                 'bar'  : 'baz',
                 'hello': 'world'
@@ -57,7 +57,7 @@
     });
 
     test("Deleting multiple payload items", function () {
-        var payloadStore = giant.PayloadStore.create(this)
+        var payloadStore = $event.PayloadStore.create(this)
             .setPayloadItems('foo', {
                 'bar'  : 'baz',
                 'hello': 'world'
@@ -73,7 +73,7 @@
     });
 
     test("Payload getter", function () {
-        var payloadStore = giant.PayloadStore.create(this)
+        var payloadStore = $event.PayloadStore.create(this)
             .setPayloadItems('foo', {
                 'bar'  : 'baz',
                 'hello': 'world'

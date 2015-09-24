@@ -1,53 +1,53 @@
-/*global giant */
-$oop.postpone(giant, 'EventCollection', function () {
+/*global $event */
+$oop.postpone($event, 'EventCollection', function () {
     "use strict";
 
     /**
-     * @name giant.EventCollection.create
+     * @name $event.EventCollection.create
      * @function
      * @param {object} [items] Initial contents.
-     * @returns {giant.EventCollection}
+     * @returns {$event.EventCollection}
      */
 
     /**
-     * @name giant.EventCollection#eventName
+     * @name $event.EventCollection#eventName
      * @ignore
      */
 
     /**
-     * @name giant.EventCollection#eventSpace
+     * @name $event.EventCollection#eventSpace
      * @ignore
      */
 
     /**
-     * @name giant.EventCollection#canBubble
+     * @name $event.EventCollection#canBubble
      * @ignore
      */
 
     /**
-     * @name giant.EventCollection#payload
+     * @name $event.EventCollection#payload
      * @ignore
      */
 
     /**
-     * @name giant.EventCollection#currentPath
+     * @name $event.EventCollection#currentPath
      * @ignore
      */
 
     /**
-     * @name giant.EventCollection#originalPath
+     * @name $event.EventCollection#originalPath
      * @ignore
      */
 
     /**
-     * @name giant.EventCollection#broadcastPath
+     * @name $event.EventCollection#broadcastPath
      * @ignore
      */
 
     /**
-     * @class giant.EventCollection
+     * @class $event.EventCollection
      * @extends $data.Collection
-     * @extends giant.Event
+     * @extends $event.Event
      */
-    giant.EventCollection = $data.Collection.of(giant.Event);
+    $event.EventCollection = $data.Collection.of($event.Event);
 });

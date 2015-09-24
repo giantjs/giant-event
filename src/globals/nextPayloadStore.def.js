@@ -1,15 +1,15 @@
-/*global giant */
-$oop.postpone(giant, 'nextPayloadStore', function () {
+/*global $event */
+$oop.postpone($event, 'nextPayloadStore', function () {
     "use strict";
 
     /**
      * Temporary storage for event payload.
-     * @type {giant.PayloadStore}
+     * @type {$event.PayloadStore}
      */
-    giant.nextPayloadStore = giant.PayloadStore.create();
+    $event.nextPayloadStore = $event.PayloadStore.create();
 });
 
-$oop.postpone(giant, 'setNextPayloadItem', function () {
+$oop.postpone($event, 'setNextPayloadItem', function () {
     "use strict";
 
     /**
@@ -19,12 +19,12 @@ $oop.postpone(giant, 'setNextPayloadItem', function () {
      * @param {string} payloadItemName
      * @param {*} payloadItemValue
      */
-    giant.setNextPayloadItem = function (eventName, payloadItemName, payloadItemValue) {
-        giant.nextPayloadStore.setPayloadItem(eventName, payloadItemName, payloadItemValue);
+    $event.setNextPayloadItem = function (eventName, payloadItemName, payloadItemValue) {
+        $event.nextPayloadStore.setPayloadItem(eventName, payloadItemName, payloadItemValue);
     };
 });
 
-$oop.postpone(giant, 'setNextPayloadItems', function () {
+$oop.postpone($event, 'setNextPayloadItems', function () {
     "use strict";
 
     /**
@@ -32,12 +32,12 @@ $oop.postpone(giant, 'setNextPayloadItems', function () {
      * @param {string} eventName
      * @param {object} payload
      */
-    giant.setNextPayloadItems = function (eventName, payload) {
-        giant.nextPayloadStore.setPayloadItems(eventName, payload);
+    $event.setNextPayloadItems = function (eventName, payload) {
+        $event.nextPayloadStore.setPayloadItems(eventName, payload);
     };
 });
 
-$oop.postpone(giant, 'deleteNextPayloadItem', function () {
+$oop.postpone($event, 'deleteNextPayloadItem', function () {
     "use strict";
 
     /**
@@ -45,12 +45,12 @@ $oop.postpone(giant, 'deleteNextPayloadItem', function () {
      * @param {string} eventName
      * @param {string} payloadItemName
      */
-    giant.deleteNextPayloadItem = function (eventName, payloadItemName) {
-        giant.nextPayloadStore.deletePayloadItem(eventName, payloadItemName);
+    $event.deleteNextPayloadItem = function (eventName, payloadItemName) {
+        $event.nextPayloadStore.deletePayloadItem(eventName, payloadItemName);
     };
 });
 
-$oop.postpone(giant, 'deleteNextPayloadItems', function () {
+$oop.postpone($event, 'deleteNextPayloadItems', function () {
     "use strict";
 
     /**
@@ -58,8 +58,8 @@ $oop.postpone(giant, 'deleteNextPayloadItems', function () {
      * Pass item names following the first argument.
      * @param {string} eventName
      */
-    giant.deleteNextPayloadItems = function (eventName) {
-        var nextPayloadStore = giant.nextPayloadStore;
+    $event.deleteNextPayloadItems = function (eventName) {
+        var nextPayloadStore = $event.nextPayloadStore;
         nextPayloadStore.deletePayloadItems.apply(nextPayloadStore, arguments);
     };
 });

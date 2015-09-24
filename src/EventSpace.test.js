@@ -1,4 +1,4 @@
-/*global giant, Q */
+/*global $event, Q */
 (function () {
     "use strict";
 
@@ -18,7 +18,7 @@
 
     module("EventSpace", {
         setup: function () {
-            testEventSpace = giant.EventSpace.create()
+            testEventSpace = $event.EventSpace.create()
                 .subscribeTo('eventA', 'test>event>path'.toPath(), handler1)
                 .subscribeTo('eventA', 'test>event>path'.toPath(), handler2)
                 .subscribeTo('eventB', 'test>event>path'.toPath(), handler3)
@@ -27,34 +27,34 @@
     });
 
     test("Instantiation", function () {
-        var eventSpace = giant.EventSpace.create();
+        var eventSpace = $event.EventSpace.create();
 
         ok(eventSpace.eventRegistry.isA($data.Tree), "should set event registry as a Tree");
         deepEqual(eventSpace.eventRegistry.items, {}, "should initialize event registry Tree as empty");
     });
 
     test("Spawning event", function () {
-        var eventSpace = giant.EventSpace.create(),
+        var eventSpace = $event.EventSpace.create(),
             link,
             spawnedEvent;
 
-        link = giant.pushOriginalEvent(giant.Event.create('foo', eventSpace));
-        giant.setNextPayloadItem('eventA', 'foo', {});
+        link = $event.pushOriginalEvent($event.Event.create('foo', eventSpace));
+        $event.setNextPayloadItem('eventA', 'foo', {});
 
         spawnedEvent = eventSpace.spawnEvent('eventA');
 
-        ok(spawnedEvent.isA(giant.Event), "should return Event instance");
-        deepEqual(spawnedEvent.payload, giant.nextPayloadStore.getPayload('eventA'),
+        ok(spawnedEvent.isA($event.Event), "should return Event instance");
+        deepEqual(spawnedEvent.payload, $event.nextPayloadStore.getPayload('eventA'),
             "should prepare event payload based on next payload on event space");
-        strictEqual(spawnedEvent.originalEvent, giant.originalEventStack.getLastEvent(),
+        strictEqual(spawnedEvent.originalEvent, $event.originalEventStack.getLastEvent(),
             "should set original event");
 
         link.unlink();
-        giant.deleteNextPayloadItem('eventA', 'foo');
+        $event.deleteNextPayloadItem('eventA', 'foo');
     });
 
     test("First subscription", function () {
-        var eventSpace = giant.EventSpace.create();
+        var eventSpace = $event.EventSpace.create();
 
         function handler1() {
         }
@@ -78,7 +78,7 @@
     });
 
     test("Subsequent subscription to same event / path", function () {
-        var eventSpace = giant.EventSpace.create();
+        var eventSpace = $event.EventSpace.create();
 
         function handler1() {
         }
@@ -102,7 +102,7 @@
     });
 
     test("Subsequent subscription to different event / path", function () {
-        var eventSpace = giant.EventSpace.create();
+        var eventSpace = $event.EventSpace.create();
 
         function handler1() {
         }
@@ -257,7 +257,7 @@
         function handler() {
         }
 
-        var eventSpace = giant.EventSpace.create(),
+        var eventSpace = $event.EventSpace.create(),
             result;
 
         result = eventSpace.subscribeToUntilTriggered('eventA', 'test>event>path'.toPath(), handler);
@@ -292,10 +292,10 @@
     test("Path delegation", function () {
         expect(5);
 
-        var eventSpace = giant.EventSpace.create(),
+        var eventSpace = $event.EventSpace.create(),
             result;
 
-        function handler(/** giant.Event */ event) {
+        function handler(/** $event.Event */ event) {
             equal(event.currentPath.toString(), 'test>event>path',
                 "should call handler with currentPath set on event");
             equal(event.originalPath.toString(), 'test>event>path>foo',
@@ -319,10 +319,10 @@
     test("Query delegation", function () {
         expect(4);
 
-        var eventSpace = giant.EventSpace.create(),
+        var eventSpace = $event.EventSpace.create(),
             result;
 
-        function handler(/** giant.Event */ event) {
+        function handler(/** $event.Event */ event) {
             equal(event.currentPath.toString(), 'test>event>|>foo',
                 "should call handler with currentPath set on event to query");
             equal(event.originalPath.toString(), 'test>event>bar>foo>baz',
@@ -340,7 +340,7 @@
     });
 
     test("Unsubscribing from delegated event", function () {
-        var eventSpace = giant.EventSpace.create(),
+        var eventSpace = $event.EventSpace.create(),
             delegateHandler;
 
         function handler() {
@@ -361,7 +361,7 @@
     test("Calling handlers for event", function () {
         expect(6);
 
-        var eventSpace = giant.EventSpace.create()
+        var eventSpace = $event.EventSpace.create()
                 .subscribeTo('eventA', 'test>event'.toPath(), function (event, data) {
                     equal(trace++, 1, "should call handler second");
                     strictEqual(event, eventA, "should pass spawned event to handler");
@@ -372,7 +372,7 @@
             link = $data.Link.create(),
             trace = 0;
 
-        giant.originalEventStack.addMocks({
+        $event.originalEventStack.addMocks({
             pushEvent: function () {
                 equal(trace++, 0, "should push event first");
                 return link;
@@ -390,7 +390,7 @@
 
         result = eventSpace.callHandlers(eventA);
 
-        giant.originalEventStack.removeMocks();
+        $event.originalEventStack.removeMocks();
 
         strictEqual(result, 1, "should return number of handlers run");
     });
@@ -398,7 +398,7 @@
     asyncTest("Calling handler returning thenable", function () {
         expect(3);
 
-        var eventSpace = giant.EventSpace.create()
+        var eventSpace = $event.EventSpace.create()
                 .subscribeTo('eventA', 'test>event'.toPath(), function () {
                     equal(trace++, 1, "should call handler second");
                     var deferred = Q.defer();
@@ -409,7 +409,7 @@
             link = $data.Link.create(),
             trace = 0;
 
-        giant.originalEventStack.addMocks({
+        $event.originalEventStack.addMocks({
             pushEvent: function () {
                 equal(trace++, 0, "should push event first");
                 return link;
@@ -427,11 +427,11 @@
         eventA.currentPath = eventA.originalPath.clone();
         eventSpace.callHandlers(eventA);
 
-        giant.originalEventStack.removeMocks();
+        $event.originalEventStack.removeMocks();
     });
 
     test("Calling handlers for invalid event", function () {
-        var eventSpace = giant.EventSpace.create(),
+        var eventSpace = $event.EventSpace.create(),
             eventA = eventSpace.spawnEvent('eventA'),
             result;
 
@@ -445,7 +445,7 @@
     test("Calling handlers with stop-propagation", function () {
         expect(2);
 
-        var eventSpace = giant.EventSpace.create()
+        var eventSpace = $event.EventSpace.create()
                 .subscribeTo('event', 'test>event'.toPath(), function () {
                     ok(true, "should call handler only once");
                     return false;
@@ -459,7 +459,7 @@
     });
 
     test("Relative path query", function () {
-        var eventSpace = giant.EventSpace.create()
+        var eventSpace = $event.EventSpace.create()
                 .subscribeTo('eventA', 'test>event'.toPath(), handler1)
                 .subscribeTo('eventA', 'test>event>foo'.toPath(), handler1)
                 .subscribeTo('eventA', 'test>event>foo>bar'.toPath(), handler1)
@@ -471,7 +471,7 @@
             result;
 
         result = eventSpace.getPathsRelativeTo('eventA', 'test>event'.toPath());
-        ok(result.isA(giant.PathCollection), "should return PathCollection instance");
+        ok(result.isA($event.PathCollection), "should return PathCollection instance");
 
         deepEqual(
             result.callOnEachItem('toString').items,
@@ -500,7 +500,7 @@
     });
 
     test("Relative path query w/ no subscriptions", function () {
-        var eventSpace = giant.EventSpace.create();
+        var eventSpace = $event.EventSpace.create();
 
         deepEqual(
             eventSpace.getPathsRelativeTo('eventA', 'test>event'.toPath()).items,
@@ -511,7 +511,7 @@
 
     // TODO: Why is this here and not in Event?
     test("Broadcasting with delegation", function () {
-        var eventSpace = giant.EventSpace.create(),
+        var eventSpace = $event.EventSpace.create(),
             event = eventSpace.spawnEvent('eventA'),
             triggeredPaths;
 

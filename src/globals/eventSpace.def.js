@@ -1,10 +1,10 @@
-/*global giant */
-$oop.postpone(giant, 'eventSpace', function () {
+/*global $event */
+$oop.postpone($event, 'eventSpace', function () {
     "use strict";
 
     /**
      * Global, shared event space.
-     * @type {giant.EventSpace}
+     * @type {$event.EventSpace}
      */
-    giant.eventSpace = giant.EventSpace.create();
+    $event.eventSpace = $event.EventSpace.create();
 });

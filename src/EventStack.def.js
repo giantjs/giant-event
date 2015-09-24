@@ -1,5 +1,5 @@
-/*global giant */
-$oop.postpone(giant, 'EventStack', function () {
+/*global $event */
+$oop.postpone($event, 'EventStack', function () {
     "use strict";
 
     var base = $oop.Base,
@@ -7,9 +7,9 @@ $oop.postpone(giant, 'EventStack', function () {
 
     /**
      * Creates an EventStack instance.
-     * @name giant.EventStack.create
+     * @name $event.EventStack.create
      * @function
-     * @returns {giant.EventStack}
+     * @returns {$event.EventStack}
      */
 
     /**
@@ -17,8 +17,8 @@ $oop.postpone(giant, 'EventStack', function () {
      * @class
      * @extends $oop.Base
      */
-    giant.EventStack = self
-        .addMethods(/** @lends giant.EventStack# */{
+    $event.EventStack = self
+        .addMethods(/** @lends $event.EventStack# */{
             /**
              * @ignore
              */
@@ -32,7 +32,7 @@ $oop.postpone(giant, 'EventStack', function () {
 
             /**
              * Adds an event to the stack. To remove the event from the stack, call .unlink() on the returned $data.ValueLink instance.
-             * @param {giant.Event|*} event
+             * @param {$event.Event|*} event
              * @returns {$data.ValueLink}
              */
             pushEvent: function (event) {
@@ -43,7 +43,7 @@ $oop.postpone(giant, 'EventStack', function () {
 
             /**
              * Retrieves the last event added to the stack.
-             * @returns {giant.Event|*}
+             * @returns {$event.Event|*}
              */
             getLastEvent: function () {
                 return this.events.lastLink.previousLink.value;

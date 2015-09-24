@@ -1,11 +1,11 @@
-/*global giant */
+/*global $event */
 (function () {
     "use strict";
 
     module("EventStack");
 
     test("Instantiation", function () {
-        var eventStack = giant.EventStack.create();
+        var eventStack = $event.EventStack.create();
 
         ok(eventStack.events.isA($data.OpenChain), "should add events property");
     });
@@ -13,7 +13,7 @@
     test("Pushing event", function () {
         expect(3);
 
-        var eventStack = giant.EventStack.create(),
+        var eventStack = $event.EventStack.create(),
             event = {},
             link;
 
@@ -30,7 +30,7 @@
     });
 
     test("First event getter", function () {
-        var eventStack = giant.EventStack.create(),
+        var eventStack = $event.EventStack.create(),
             event = {};
 
         eventStack.pushEvent({});
@@ -40,7 +40,7 @@
     });
 
     test("Unordered pop", function () {
-        var eventStack = giant.EventStack.create(),
+        var eventStack = $event.EventStack.create(),
             link1 = eventStack.pushEvent(1), // will be sync
             link2 = eventStack.pushEvent(2), // will be async
             link3 = eventStack.pushEvent(3); // will be sync

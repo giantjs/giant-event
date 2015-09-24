@@ -1,14 +1,14 @@
-/*global giant */
-$oop.postpone(giant, 'PayloadStore', function () {
+/*global $event */
+$oop.postpone($event, 'PayloadStore', function () {
     "use strict";
 
     var base = $oop.Base,
         self = base.extend();
 
     /**
-     * @name giant.PayloadStore.create
+     * @name $event.PayloadStore.create
      * @function
-     * @returns {giant.PayloadStore}
+     * @returns {$event.PayloadStore}
      */
 
     /**
@@ -16,8 +16,8 @@ $oop.postpone(giant, 'PayloadStore', function () {
      * @class
      * @extends $oop.Base
      */
-    giant.PayloadStore = self
-        .addMethods(/** @lends giant.PayloadStore# */{
+    $event.PayloadStore = self
+        .addMethods(/** @lends $event.PayloadStore# */{
             /** @ignore */
             init: function () {
                 /**

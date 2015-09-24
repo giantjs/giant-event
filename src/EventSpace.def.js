@@ -1,5 +1,5 @@
-/*global giant */
-$oop.postpone(giant, 'EventSpace', function () {
+/*global $event */
+$oop.postpone($event, 'EventSpace', function () {
     "use strict";
 
     var base = $oop.Base,
@@ -7,20 +7,20 @@ $oop.postpone(giant, 'EventSpace', function () {
 
     /**
      * Instantiates an EventSpace.
-     * @name giant.EventSpace.create
+     * @name $event.EventSpace.create
      * @function
-     * @returns {giant.EventSpace}
+     * @returns {$event.EventSpace}
      */
 
     /**
      * Events traverse within a confined event space.
      * @class
      * @extends $oop.Base
-     * @extends giant.EventSpawner
-     * @extends giant.EventTarget
+     * @extends $event.EventSpawner
+     * @extends $event.EventTarget
      */
-    giant.EventSpace = self
-        .addPrivateMethods(/** @lends giant.EventSpace */{
+    $event.EventSpace = self
+        .addPrivateMethods(/** @lends $event.EventSpace */{
             /**
              * Generates a stub for event handlers. (An empty array)
              * @returns {Array}
@@ -32,12 +32,12 @@ $oop.postpone(giant, 'EventSpace', function () {
 
             /**
              * Prepares spawned event for triggering.
-             * @param {giant.Event} event
+             * @param {$event.Event} event
              * @private
              */
             _prepareEvent: function (event) {
-                var nextPayloadItems = giant.nextPayloadStore.getPayload(event.eventName),
-                    nextOriginalEvent = giant.originalEventStack.getLastEvent();
+                var nextPayloadItems = $event.nextPayloadStore.getPayload(event.eventName),
+                    nextOriginalEvent = $event.originalEventStack.getLastEvent();
 
                 if (nextPayloadItems) {
                     // applying next payload on spawned event
@@ -50,7 +50,7 @@ $oop.postpone(giant, 'EventSpace', function () {
                 }
             }
         })
-        .addMethods(/** @lends giant.EventSpace# */{
+        .addMethods(/** @lends $event.EventSpace# */{
             /** @ignore */
             init: function () {
                 /**
@@ -64,10 +64,10 @@ $oop.postpone(giant, 'EventSpace', function () {
 
             /**
              * @param {string} eventName
-             * @returns {giant.Event}
+             * @returns {$event.Event}
              */
             spawnEvent: function (eventName) {
-                var event = giant.Event.create(eventName, this);
+                var event = $event.Event.create(eventName, this);
                 this._prepareEvent(event);
                 return event;
             },
@@ -79,7 +79,7 @@ $oop.postpone(giant, 'EventSpace', function () {
              * @param {$data.Path} eventPath Path we're listening to
              * @param {function} handler Event handler function that is called when the event
              * is triggered on (or bubbles to) the specified path.
-             * @returns {giant.EventSpace}
+             * @returns {$event.EventSpace}
              */
             subscribeTo: function (eventName, eventPath, handler) {
                 $assertion.isFunction(handler, "Invalid event handler function");
@@ -105,7 +105,7 @@ $oop.postpone(giant, 'EventSpace', function () {
              * @param {string} [eventName] Name of event to be triggered.
              * @param {$data.Path} [eventPath] Path we're listening to
              * @param {function} [handler] Event handler function
-             * @returns {giant.EventSpace}
+             * @returns {$event.EventSpace}
              */
             unsubscribeFrom: function (eventName, eventPath, handler) {
                 $assertion.isFunctionOptional(handler, "Invalid event handler function");
@@ -159,7 +159,7 @@ $oop.postpone(giant, 'EventSpace', function () {
                 /**
                  * Handler wrapper for events that automatically unsubscribe
                  * after the first trigger.
-                 * @param {giant.Event} event
+                 * @param {$event.Event} event
                  * @param {*} data
                  * @returns {*} Whatever the user-defined handler returns (possibly a `false`)
                  */
@@ -191,7 +191,7 @@ $oop.postpone(giant, 'EventSpace', function () {
 
                 /**
                  * Handler wrapper for subscribing delegates
-                 * @param {giant.Event} event Event object passed down by the triggering process
+                 * @param {$event.Event} event Event object passed down by the triggering process
                  * @param {*} data Custom event data
                  * @returns {*} Whatever the user-defined handler returns (possibly a `false`)
                  */
@@ -217,9 +217,9 @@ $oop.postpone(giant, 'EventSpace', function () {
             /**
              * Calls handlers associated with an event name and path.
              * Handlers are assumed to be synchronous.
-             * @param {giant.Event} event
+             * @param {$event.Event} event
              * @returns {number|boolean} Number of handlers processed, or false when one handler returned false.
-             * @see giant.Event#triggerSync
+             * @see $event.Event#triggerSync
              */
             callHandlers: function (event) {
                 var handlersPath = [event.currentPath.toString(), event.eventName].toPath(),
@@ -237,7 +237,7 @@ $oop.postpone(giant, 'EventSpace', function () {
                         handler = handlers[i];
 
                         // pushing original event
-                        link = giant.pushOriginalEvent(event);
+                        link = $event.pushOriginalEvent(event);
 
                         // calling handler, passing event and payload
                         // TODO: Do not pass payload.
@@ -268,7 +268,7 @@ $oop.postpone(giant, 'EventSpace', function () {
              * Retrieves subscribed paths that are relative to the specified path.
              * @param {string} eventName
              * @param {$data.Path} path
-             * @returns {giant.PathCollection} Collection of paths relative to (not including) `path`
+             * @returns {$event.PathCollection} Collection of paths relative to (not including) `path`
              * Question is which lib/class should delegate the method.
              */
             getPathsRelativeTo: function (eventName, path) {
@@ -280,16 +280,16 @@ $oop.postpone(giant, 'EventSpace', function () {
 
                 if (paths) {
                     // there are subscriptions matching eventName
-                    return /** @type giant.PathCollection */paths
+                    return /** @type $event.PathCollection */paths
                         // querying collection of strings that are relative to `path`
                         .getRangeByPrefixAsHash(path.toString(), true)
                         .toStringCollection()
                         // converting them to a collection of paths
-                        .toPathOrQuery().asType(giant.PathCollection);
+                        .toPathOrQuery().asType($event.PathCollection);
                 } else {
                     // no subscriptions match eventName
                     // returning empty path collection
-                    return giant.PathCollection.create([]);
+                    return $event.PathCollection.create([]);
                 }
             }
         });
@@ -298,14 +298,14 @@ $oop.postpone(giant, 'EventSpace', function () {
 (function () {
     "use strict";
 
-    $assertion.addTypes(/** @lends giant */{
+    $assertion.addTypes(/** @lends $event */{
         isEventSpace: function (expr) {
-            return giant.EventSpace.isPrototypeOf(expr);
+            return $event.EventSpace.isPrototypeOf(expr);
         },
 
         isEventSpaceOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                giant.EventSpace.isPrototypeOf(expr);
+                $event.EventSpace.isPrototypeOf(expr);
         }
     });
 }());

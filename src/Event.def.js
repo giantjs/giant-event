@@ -1,5 +1,5 @@
-/*global giant */
-$oop.postpone(giant, 'Event', function () {
+/*global $event */
+$oop.postpone($event, 'Event', function () {
     "use strict";
 
     var base = $oop.Base,
@@ -7,11 +7,11 @@ $oop.postpone(giant, 'Event', function () {
 
     /**
      * Instantiates class.
-     * @name giant.Event.create
+     * @name $event.Event.create
      * @function
      * @param {string} eventName Event name
-     * @param {giant.EventSpace} eventSpace Event space associated with event
-     * @returns {giant.Event}
+     * @param {$event.EventSpace} eventSpace Event space associated with event
+     * @returns {$event.Event}
      */
 
     /**
@@ -19,14 +19,14 @@ $oop.postpone(giant, 'Event', function () {
      * Events carry all information regarding their position & properties.
      * @class
      * @extends $oop.Base
-     * @extends giant.EventSource
+     * @extends $event.EventSource
      */
-    giant.Event = self
-        .addPrivateMethods(/** @lends giant.Event# */{
+    $event.Event = self
+        .addPrivateMethods(/** @lends $event.Event# */{
             /**
              * Creates a new event instance and prepares it to be triggered.
              * @param {$data.Path} targetPath
-             * @returns {giant.Event}
+             * @returns {$event.Event}
              * @private
              */
             _spawnMainBroadcastEvent: function (targetPath) {
@@ -40,7 +40,7 @@ $oop.postpone(giant, 'Event', function () {
              * Broadcast events do not bubble.
              * @param {$data.Path} broadcastPath
              * @param {$data.Path} targetPath
-             * @returns {giant.Event}
+             * @returns {$event.Event}
              * @private
              */
             _spawnBroadcastEvent: function (broadcastPath, targetPath) {
@@ -50,10 +50,10 @@ $oop.postpone(giant, 'Event', function () {
                     .setTargetPath(targetPath);
             }
         })
-        .addMethods(/** @lends giant.Event# */{
+        .addMethods(/** @lends $event.Event# */{
             /**
              * @param {string} eventName Event name
-             * @param {giant.EventSpace} eventSpace Event space associated with event
+             * @param {$event.EventSpace} eventSpace Event space associated with event
              * @ignore
              */
             init: function (eventName, eventSpace) {
@@ -68,7 +68,7 @@ $oop.postpone(giant, 'Event', function () {
                 this.eventName = eventName;
 
                 /**
-                 * @type {giant.EventSpace}
+                 * @type {$event.EventSpace}
                  * @constant
                  */
                 this.eventSpace = eventSpace;
@@ -82,7 +82,7 @@ $oop.postpone(giant, 'Event', function () {
                 /**
                  * Giant event or DOM event that led to triggering the current event.
                  * In most cases, this property is set automatically.
-                 * @type {giant.Event|*}
+                 * @type {$event.Event|*}
                  */
                 this.originalEvent = undefined;
 
@@ -107,9 +107,9 @@ $oop.postpone(giant, 'Event', function () {
                 /**
                  * Custom payload to be carried by the event.
                  * In most cases, this property is not modified directly, but through
-                 * giant.setNextPayloadItem()
+                 * $event.setNextPayloadItem()
                  * @type {object}
-                 * @see giant.setNextPayloadItem
+                 * @see $event.setNextPayloadItem
                  */
                 this.payload = {};
 
@@ -138,7 +138,7 @@ $oop.postpone(giant, 'Event', function () {
              * the one specified by the argument.
              * Override in subclasses to clone additional properties.
              * @param {$data.Path} [currentPath]
-             * @returns {giant.Event}
+             * @returns {$event.Event}
              */
             clone: function (currentPath) {
                 $assertion.isPathOptional(currentPath, "Invalid current event path");
@@ -167,7 +167,7 @@ $oop.postpone(giant, 'Event', function () {
             /**
              * Sets whether the event can bubble
              * @param {boolean} value Bubbling flag
-             * @returns {giant.Event}
+             * @returns {$event.Event}
              */
             allowBubbling: function (value) {
                 $assertion.isBoolean(value, "Invalid bubbling flag");
@@ -177,8 +177,8 @@ $oop.postpone(giant, 'Event', function () {
 
             /**
              * Sets original event that led to triggering the current event.
-             * @param {giant.Event|*} originalEvent
-             * @returns {giant.Event}
+             * @param {$event.Event|*} originalEvent
+             * @returns {$event.Event}
              */
             setOriginalEvent: function (originalEvent) {
                 this.originalEvent = originalEvent;
@@ -188,7 +188,7 @@ $oop.postpone(giant, 'Event', function () {
             /**
              * Retrieves event from chain of original events by type.
              * @param {function|$oop.Base} eventType
-             * @returns {giant.Event|*} Original event matching the specified type.
+             * @returns {$event.Event|*} Original event matching the specified type.
              */
             getOriginalEventByType: function (eventType) {
                 var that = this.originalEvent,
@@ -220,7 +220,7 @@ $oop.postpone(giant, 'Event', function () {
             /**
              * Retrieves event from chain of original events by the name of the event.
              * @param {string} eventName
-             * @returns {giant.Event|*} Original event matching the specified name.
+             * @returns {$event.Event|*} Original event matching the specified name.
              */
             getOriginalEventByName: function (eventName) {
                 var that = this.originalEvent,
@@ -240,7 +240,7 @@ $oop.postpone(giant, 'Event', function () {
 
             /**
              * Sets flag for default behavior prevention to true.
-             * @returns {giant.Event}
+             * @returns {$event.Event}
              */
             preventDefault: function () {
                 this.defaultPrevented = true;
@@ -250,7 +250,7 @@ $oop.postpone(giant, 'Event', function () {
             /**
              * Assigns paths to the event.
              * @param {$data.Path} targetPath Path on which to trigger event.
-             * @returns {giant.Event}
+             * @returns {$event.Event}
              */
             setTargetPath: function (targetPath) {
                 $assertion.isPath(targetPath, "Invalid target path");
@@ -262,7 +262,7 @@ $oop.postpone(giant, 'Event', function () {
             /**
              * Assigns a broadcast path to the event.
              * @param {$data.Path} broadcastPath Path associated with broadcasting.
-             * @returns {giant.Event}
+             * @returns {$event.Event}
              */
             setBroadcastPath: function (broadcastPath) {
                 $assertion.isPath(broadcastPath, "Invalid broadcast path");
@@ -273,7 +273,7 @@ $oop.postpone(giant, 'Event', function () {
             /**
              * Sets event sender reference.
              * @param {*} sender
-             * @returns {giant.Event}
+             * @returns {$event.Event}
              */
             setSender: function (sender) {
                 this.sender = sender;
@@ -283,11 +283,11 @@ $oop.postpone(giant, 'Event', function () {
             /**
              * Sets an item on the event payload.
              * An event may carry multiple payload items set by multiple sources.
-             * User payloads are usually set via giant.setNextPayloadItem.
+             * User payloads are usually set via $event.setNextPayloadItem.
              * @param {string} payloadName
              * @param {*} payloadValue
-             * @returns {giant.Event}
-             * @see giant.EventSpace#setNextPayloadItem
+             * @returns {$event.Event}
+             * @see $event.EventSpace#setNextPayloadItem
              */
             setPayloadItem: function (payloadName, payloadValue) {
                 this.payload[payloadName] = payloadValue;
@@ -297,9 +297,9 @@ $oop.postpone(giant, 'Event', function () {
             /**
              * Sets multiple payload items in the current event's payload.
              * An event may carry multiple payload items set by multiple sources.
-             * User payloads are usually set via giant.setNextPayloadItems.
+             * User payloads are usually set via $event.setNextPayloadItems.
              * @param {object} payloadItems
-             * @returns {giant.Event}
+             * @returns {$event.Event}
              */
             setPayloadItems: function (payloadItems) {
                 var payload = this.payload,
@@ -320,7 +320,7 @@ $oop.postpone(giant, 'Event', function () {
              * between stages of bubbling, hence holding on to an event instance in an async handler
              * may not reflect the current paths and payload carried.
              * @param {$data.Path} [targetPath] Path on which to trigger event.
-             * @returns {giant.Event}
+             * @returns {$event.Event}
              */
             triggerSync: function (targetPath) {
                 $assertion.isPathOptional(targetPath, "Invalid target path");
@@ -366,7 +366,7 @@ $oop.postpone(giant, 'Event', function () {
              * on the specified broadcast path. It is necessary for delegates to react to
              * broadcasts.
              * @param {$data.Path} [broadcastPath] Target root for broadcast.
-             * @returns {giant.Event}
+             * @returns {$event.Event}
              */
             broadcastSync: function (broadcastPath) {
                 $assertion.isPathOptional(broadcastPath, "Invalid broadcast path");
@@ -380,7 +380,7 @@ $oop.postpone(giant, 'Event', function () {
                         .getPathsRelativeTo(this.eventName, broadcastPath)
                         // spawning an event for each subscribed path
                         .passEachItemTo(this._spawnBroadcastEvent, this, 1, broadcastPath)
-                        .asType(giant.EventCollection)
+                        .asType($event.EventCollection)
                         // adding main event
                         .setItem('main', mainEvent);
 
@@ -399,16 +399,16 @@ $oop.postpone(giant, 'Event', function () {
 (function () {
     "use strict";
 
-    $assertion.addTypes(/** @lends giant */{
-        /** @param {giant.Event} expr */
+    $assertion.addTypes(/** @lends $event */{
+        /** @param {$event.Event} expr */
         isEvent: function (expr) {
-            return giant.Event.isBaseOf(expr);
+            return $event.Event.isBaseOf(expr);
         },
 
-        /** @param {giant.Event} expr */
+        /** @param {$event.Event} expr */
         isEventOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                giant.Event.isBaseOf(expr);
+                $event.Event.isBaseOf(expr);
         }
     });
 }());

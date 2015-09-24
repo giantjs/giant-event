@@ -1,5 +1,5 @@
-/*global giant */
-$oop.postpone(giant, 'Evented', function () {
+/*global $event */
+$oop.postpone($event, 'Evented', function () {
     "use strict";
 
     var base = $oop.Base,
@@ -11,12 +11,12 @@ $oop.postpone(giant, 'Evented', function () {
      * events on a specified event space directly.
      * @class
      * @extends $oop.Base
-     * @extends giant.EventSpawner
-     * @extends giant.EventSource
-     * @extends giant.EventTarget
+     * @extends $event.EventSpawner
+     * @extends $event.EventSource
+     * @extends $event.EventTarget
      */
-    giant.Evented = self
-        .addPrivateMethods(/** @lends giant.Evented# */{
+    $event.Evented = self
+        .addPrivateMethods(/** @lends $event.Evented# */{
             /**
              * @param {$data.Dictionary} dictionary
              * @returns {Array}
@@ -63,7 +63,7 @@ $oop.postpone(giant, 'Evented', function () {
                     });
             }
         })
-        .addMethods(/** @lends giant.Evented# */{
+        .addMethods(/** @lends $event.Evented# */{
             /** @ignore */
             init: function () {
                 /**
@@ -78,7 +78,7 @@ $oop.postpone(giant, 'Evented', function () {
              * as the target path. Returned event may be triggered without specifying a target path.
              * Current eventSpace and eventPath properties must not be undefined.
              * @param {string} eventName
-             * @returns {giant.Event}
+             * @returns {$event.Event}
              */
             spawnEvent: function (eventName) {
                 return this.eventSpace.spawnEvent(eventName)
@@ -88,9 +88,9 @@ $oop.postpone(giant, 'Evented', function () {
 
             /**
              * Sets event space on current class or instance.
-             * @param {giant.EventSpace} eventSpace
-             * @returns {giant.Evented}
-             * @memberOf {giant.Evented}
+             * @param {$event.EventSpace} eventSpace
+             * @returns {$event.Evented}
+             * @memberOf {$event.Evented}
              */
             setEventSpace: function (eventSpace) {
                 $assertion.isEventSpace(eventSpace, "Invalid event space");
@@ -101,8 +101,8 @@ $oop.postpone(giant, 'Evented', function () {
             /**
              * Sets event path for the current class or instance.
              * @param {$data.Path} eventPath
-             * @returns {giant.Evented}
-             * @memberOf {giant.Evented}
+             * @returns {$event.Evented}
+             * @memberOf {$event.Evented}
              */
             setEventPath: function (eventPath) {
                 var baseEventPath = this.getBase().eventPath,
@@ -133,7 +133,7 @@ $oop.postpone(giant, 'Evented', function () {
              * @param {string} eventName Name of event to be triggered.
              * @param {function} handler Event handler function that is called when the event
              * is triggered on (or bubbles to) the specified path.
-             * @returns {giant.Evented}
+             * @returns {$event.Evented}
              */
             subscribeTo: function (eventName, handler) {
                 this.eventSpace.subscribeTo(eventName, this.eventPath, handler);
@@ -145,7 +145,7 @@ $oop.postpone(giant, 'Evented', function () {
              * Unsubscribes from event.
              * @param {string} [eventName] Name of event to be triggered.
              * @param {function} [handler] Event handler function
-             * @returns {giant.Evented}
+             * @returns {$event.Evented}
              */
             unsubscribeFrom: function (eventName, handler) {
                 this.eventSpace.unsubscribeFrom(eventName, this.eventPath, handler);
@@ -164,7 +164,7 @@ $oop.postpone(giant, 'Evented', function () {
              * @param {string} eventName Name of event to be triggered.
              * @param {function} handler Event handler function that is called when the event
              * is triggered on (or bubbles to) the specified path.
-             * @returns {giant.Evented}
+             * @returns {$event.Evented}
              */
             subscribeToUntilTriggered: function (eventName, handler) {
                 var oneHandler = this.eventSpace.subscribeToUntilTriggered(eventName, this.eventPath, handler);
@@ -178,7 +178,7 @@ $oop.postpone(giant, 'Evented', function () {
              * @param {string} eventName
              * @param {$data.Path} delegatePath Path we're listening to. (Could be derived, eg. Query)
              * @param {function} handler Event handler function
-             * @returns {giant.Evented}
+             * @returns {$event.Evented}
              */
             delegateSubscriptionTo: function (eventName, delegatePath, handler) {
                 var delegateHandler = this.eventSpace.delegateSubscriptionTo(eventName, this.eventPath, delegatePath, handler);
@@ -190,7 +190,7 @@ $oop.postpone(giant, 'Evented', function () {
              * Shorthand for **triggering** an event in the event space
              * associated with the instance / class.
              * @param {string} eventName
-             * @returns {giant.Evented}
+             * @returns {$event.Evented}
              */
             triggerSync: function (eventName) {
                 this.spawnEvent(eventName)
@@ -202,7 +202,7 @@ $oop.postpone(giant, 'Evented', function () {
              * Shorthand for **broadcasting** an event in the event space
              * associated with the instance / class.
              * @param {string} eventName
-             * @returns {giant.Evented}
+             * @returns {$event.Evented}
              */
             broadcastSync: function (eventName) {
                 this.spawnEvent(eventName)

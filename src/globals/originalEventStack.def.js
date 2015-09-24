@@ -1,23 +1,23 @@
-/*global giant */
-$oop.postpone(giant, 'originalEventStack', function () {
+/*global $event */
+$oop.postpone($event, 'originalEventStack', function () {
     "use strict";
 
     /**
      * Global stack for original events.
      * @type {Array}
      */
-    giant.originalEventStack = giant.EventStack.create();
+    $event.originalEventStack = $event.EventStack.create();
 });
 
-$oop.postpone(giant, 'pushOriginalEvent', function () {
+$oop.postpone($event, 'pushOriginalEvent', function () {
     "use strict";
 
     /**
      * Adds an original event to the stack.
-     * @param {giant.Event|*} originalEvent
+     * @param {$event.Event|*} originalEvent
      * @returns {$data.ValueLink}
      */
-    giant.pushOriginalEvent = function (originalEvent) {
-        return giant.originalEventStack.pushEvent(originalEvent);
+    $event.pushOriginalEvent = function (originalEvent) {
+        return $event.originalEventStack.pushEvent(originalEvent);
     };
 });
