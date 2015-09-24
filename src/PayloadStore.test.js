@@ -7,7 +7,7 @@
     test("Instantiation", function () {
         var payloadStore = giant.PayloadStore.create(this);
 
-        ok(payloadStore.payloads.isA(giant.Tree), "should add payloads property");
+        ok(payloadStore.payloads.isA($data.Tree), "should add payloads property");
     });
 
     test("Setting single payload item", function () {

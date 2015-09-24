@@ -18,7 +18,7 @@ $oop.postpone(giant, 'Evented', function () {
     giant.Evented = self
         .addPrivateMethods(/** @lends giant.Evented# */{
             /**
-             * @param {giant.Dictionary} dictionary
+             * @param {$data.Dictionary} dictionary
              * @returns {Array}
              * @private
              */
@@ -46,8 +46,8 @@ $oop.postpone(giant, 'Evented', function () {
             },
 
             /**
-             * @param {giant.Path} oldEventPath
-             * @param {giant.Path} newEventPath
+             * @param {$data.Path} oldEventPath
+             * @param {$data.Path} newEventPath
              * @private
              */
             _reSubscribe: function (oldEventPath, newEventPath) {
@@ -68,7 +68,7 @@ $oop.postpone(giant, 'Evented', function () {
             init: function () {
                 /**
                  * Stores event name - handler associations for the current evented instance.
-                 * @type {giant.Dictionary}
+                 * @type {$data.Dictionary}
                  */
                 this.subscriptionRegistry = undefined;
             },
@@ -100,7 +100,7 @@ $oop.postpone(giant, 'Evented', function () {
 
             /**
              * Sets event path for the current class or instance.
-             * @param {giant.Path} eventPath
+             * @param {$data.Path} eventPath
              * @returns {giant.Evented}
              * @memberOf {giant.Evented}
              */
@@ -116,7 +116,7 @@ $oop.postpone(giant, 'Evented', function () {
 
                 if (!subscriptionRegistry) {
                     // initializing subscription registry
-                    this.subscriptionRegistry = giant.Dictionary.create();
+                    this.subscriptionRegistry = $data.Dictionary.create();
                 } else if (subscriptionRegistry.getKeyCount()) {
                     // re-subscribing events
                     this._reSubscribe(this.eventPath, eventPath);
@@ -176,7 +176,7 @@ $oop.postpone(giant, 'Evented', function () {
              * Delegates event capturing to a path closer to the root.
              * Handlers subscribed this way CANNOT be unsubscribed individually.
              * @param {string} eventName
-             * @param {giant.Path} delegatePath Path we're listening to. (Could be derived, eg. Query)
+             * @param {$data.Path} delegatePath Path we're listening to. (Could be derived, eg. Query)
              * @param {function} handler Event handler function
              * @returns {giant.Evented}
              */

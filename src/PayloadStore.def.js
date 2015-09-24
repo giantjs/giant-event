@@ -21,9 +21,9 @@ $oop.postpone(giant, 'PayloadStore', function () {
             /** @ignore */
             init: function () {
                 /**
-                 * @type {giant.Tree}
+                 * @type {$data.Tree}
                  */
-                this.payloads = giant.Tree.create();
+                this.payloads = $data.Tree.create();
             },
 
             /**

@@ -25,18 +25,18 @@ $oop.postpone(giant, 'EventStack', function () {
             init: function () {
                 /**
                  * Chain structure serving as the buffer for events.
-                 * @type {giant.OpenChain}
+                 * @type {$data.OpenChain}
                  */
-                this.events = giant.OpenChain.create();
+                this.events = $data.OpenChain.create();
             },
 
             /**
-             * Adds an event to the stack. To remove the event from the stack, call .unlink() on the returned giant.ValueLink instance.
+             * Adds an event to the stack. To remove the event from the stack, call .unlink() on the returned $data.ValueLink instance.
              * @param {giant.Event|*} event
-             * @returns {giant.ValueLink}
+             * @returns {$data.ValueLink}
              */
             pushEvent: function (event) {
-                var link = giant.ValueLink.create().setValue(event);
+                var link = $data.ValueLink.create().setValue(event);
                 this.events.pushLink(link);
                 return link;
             },

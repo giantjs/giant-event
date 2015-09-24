@@ -25,7 +25,7 @@ $oop.postpone(giant, 'Event', function () {
         .addPrivateMethods(/** @lends giant.Event# */{
             /**
              * Creates a new event instance and prepares it to be triggered.
-             * @param {giant.Path} targetPath
+             * @param {$data.Path} targetPath
              * @returns {giant.Event}
              * @private
              */
@@ -38,8 +38,8 @@ $oop.postpone(giant, 'Event', function () {
             /**
              * Creates a new event instance and prepares it to be broadcast.
              * Broadcast events do not bubble.
-             * @param {giant.Path} broadcastPath
-             * @param {giant.Path} targetPath
+             * @param {$data.Path} broadcastPath
+             * @param {$data.Path} targetPath
              * @returns {giant.Event}
              * @private
              */
@@ -115,20 +115,20 @@ $oop.postpone(giant, 'Event', function () {
 
                 /**
                  * Path reflecting current state of bubbling
-                 * @type {giant.Path}
+                 * @type {$data.Path}
                  */
                 this.currentPath = undefined;
 
                 /**
                  * Path on which the event was originally triggered
-                 * @type {giant.Path}
+                 * @type {$data.Path}
                  */
                 this.originalPath = undefined;
 
                 /**
                  * Reference to the original target path if
                  * the event was triggered as part of a broadcast.
-                 * @type {giant.Path}
+                 * @type {$data.Path}
                  */
                 this.broadcastPath = undefined;
             },
@@ -137,7 +137,7 @@ $oop.postpone(giant, 'Event', function () {
              * Clones event and optionally sets its currentPath property to
              * the one specified by the argument.
              * Override in subclasses to clone additional properties.
-             * @param {giant.Path} [currentPath]
+             * @param {$data.Path} [currentPath]
              * @returns {giant.Event}
              */
             clone: function (currentPath) {
@@ -249,7 +249,7 @@ $oop.postpone(giant, 'Event', function () {
 
             /**
              * Assigns paths to the event.
-             * @param {giant.Path} targetPath Path on which to trigger event.
+             * @param {$data.Path} targetPath Path on which to trigger event.
              * @returns {giant.Event}
              */
             setTargetPath: function (targetPath) {
@@ -261,7 +261,7 @@ $oop.postpone(giant, 'Event', function () {
 
             /**
              * Assigns a broadcast path to the event.
-             * @param {giant.Path} broadcastPath Path associated with broadcasting.
+             * @param {$data.Path} broadcastPath Path associated with broadcasting.
              * @returns {giant.Event}
              */
             setBroadcastPath: function (broadcastPath) {
@@ -319,7 +319,7 @@ $oop.postpone(giant, 'Event', function () {
              * Event handlers are assumed to be synchronous. Event properties change
              * between stages of bubbling, hence holding on to an event instance in an async handler
              * may not reflect the current paths and payload carried.
-             * @param {giant.Path} [targetPath] Path on which to trigger event.
+             * @param {$data.Path} [targetPath] Path on which to trigger event.
              * @returns {giant.Event}
              */
             triggerSync: function (targetPath) {
@@ -334,7 +334,7 @@ $oop.postpone(giant, 'Event', function () {
                     eventSpace = this.eventSpace,
                     handlerCount;
 
-                if (!this.canBubble || this.originalPath.isA(giant.Query)) {
+                if (!this.canBubble || this.originalPath.isA($data.Query)) {
                     // event can't bubble because it's not allowed to
                     // or because path is a query and queries shouldn't bubble
                     // calling subscribed handlers once
@@ -365,7 +365,7 @@ $oop.postpone(giant, 'Event', function () {
              * Events spawned by a broadcast do not bubble except for the one that is triggered
              * on the specified broadcast path. It is necessary for delegates to react to
              * broadcasts.
-             * @param {giant.Path} [broadcastPath] Target root for broadcast.
+             * @param {$data.Path} [broadcastPath] Target root for broadcast.
              * @returns {giant.Event}
              */
             broadcastSync: function (broadcastPath) {

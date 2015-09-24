@@ -29,7 +29,7 @@
     test("Instantiation", function () {
         var eventSpace = giant.EventSpace.create();
 
-        ok(eventSpace.eventRegistry.isA(giant.Tree), "should set event registry as a Tree");
+        ok(eventSpace.eventRegistry.isA($data.Tree), "should set event registry as a Tree");
         deepEqual(eventSpace.eventRegistry.items, {}, "should initialize event registry Tree as empty");
     });
 
@@ -369,7 +369,7 @@
                 }),
             eventA = eventSpace.spawnEvent('eventA'),
             result,
-            link = giant.Link.create(),
+            link = $data.Link.create(),
             trace = 0;
 
         giant.originalEventStack.addMocks({
@@ -406,7 +406,7 @@
                     return deferred.promise;
                 }),
             eventA = eventSpace.spawnEvent('eventA'),
-            link = giant.Link.create(),
+            link = $data.Link.create(),
             trace = 0;
 
         giant.originalEventStack.addMocks({

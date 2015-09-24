@@ -55,11 +55,11 @@ $oop.postpone(giant, 'EventSpace', function () {
             init: function () {
                 /**
                  * Lookup for subscribed event handlers. Indexed by event name, then event path (stringified), then handler index.
-                 * @type {giant.Tree}
+                 * @type {$data.Tree}
                  * @constant
                  * TODO: Rename to subscriptionRegistry. Breaking.
                  */
-                this.eventRegistry = giant.Tree.create();
+                this.eventRegistry = $data.Tree.create();
             },
 
             /**
@@ -76,7 +76,7 @@ $oop.postpone(giant, 'EventSpace', function () {
              * Subscribes to event.
              * TODO: Switch eventPath / eventName arguments. Breaking.
              * @param {string} eventName Name of event to be triggered.
-             * @param {giant.Path} eventPath Path we're listening to
+             * @param {$data.Path} eventPath Path we're listening to
              * @param {function} handler Event handler function that is called when the event
              * is triggered on (or bubbles to) the specified path.
              * @returns {giant.EventSpace}
@@ -103,7 +103,7 @@ $oop.postpone(giant, 'EventSpace', function () {
              * TODO: Switch eventPath / eventName arguments. Breaking.
              * TODO: Consider changing unsetKey to unsetPath. Measure performance impact.
              * @param {string} [eventName] Name of event to be triggered.
-             * @param {giant.Path} [eventPath] Path we're listening to
+             * @param {$data.Path} [eventPath] Path we're listening to
              * @param {function} [handler] Event handler function
              * @returns {giant.EventSpace}
              */
@@ -150,7 +150,7 @@ $oop.postpone(giant, 'EventSpace', function () {
             /**
              * Subscribes to event and unsubscribes after first trigger.
              * @param {string} eventName Name of event to be triggered.
-             * @param {giant.Path} eventPath Path we're listening to
+             * @param {$data.Path} eventPath Path we're listening to
              * @param {function} handler Event handler function that is called when the event
              * is triggered on (or bubbles to) the specified path.
              * @returns {function} Event handler actually subscribed. Use this for unsubscribing.
@@ -179,8 +179,8 @@ $oop.postpone(giant, 'EventSpace', function () {
              * Delegates event capturing to a path closer to the root.
              * Handlers subscribed this way CANNOT be unsubscribed individually.
              * @param {string} eventName
-             * @param {giant.Path} capturePath Path where the event will actually subscribe
-             * @param {giant.Path} delegatePath Path we're listening to. (Could be derived, eg. Query)
+             * @param {$data.Path} capturePath Path where the event will actually subscribe
+             * @param {$data.Path} delegatePath Path we're listening to. (Could be derived, eg. Query)
              * @param {function} handler Event handler function
              * @returns {function} Event handler actually subscribed. Use this for unsubscribing.
              */
@@ -267,7 +267,7 @@ $oop.postpone(giant, 'EventSpace', function () {
             /**
              * Retrieves subscribed paths that are relative to the specified path.
              * @param {string} eventName
-             * @param {giant.Path} path
+             * @param {$data.Path} path
              * @returns {giant.PathCollection} Collection of paths relative to (not including) `path`
              * Question is which lib/class should delegate the method.
              */

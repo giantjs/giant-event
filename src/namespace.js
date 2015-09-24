@@ -12,6 +12,5 @@ var $oop = $oop || require('giant-oop');
 /** @namespace */
 var $utils = $utils || require('giant-utils');
 
-if (typeof require === 'function') {
-    require('giant-data');
-}
+/** @namespace */
+var $data = $data || require('giant-data');

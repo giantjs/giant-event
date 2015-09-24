@@ -46,8 +46,8 @@ $oop.postpone(giant, 'EventCollection', function () {
 
     /**
      * @class giant.EventCollection
-     * @extends giant.Collection
+     * @extends $data.Collection
      * @extends giant.Event
      */
-    giant.EventCollection = giant.Collection.of(giant.Event);
+    giant.EventCollection = $data.Collection.of(giant.Event);
 });

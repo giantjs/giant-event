@@ -15,7 +15,7 @@ $oop.postpone(giant, 'pushOriginalEvent', function () {
     /**
      * Adds an original event to the stack.
      * @param {giant.Event|*} originalEvent
-     * @returns {giant.ValueLink}
+     * @returns {$data.ValueLink}
      */
     giant.pushOriginalEvent = function (originalEvent) {
         return giant.originalEventStack.pushEvent(originalEvent);

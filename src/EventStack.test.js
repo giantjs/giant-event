@@ -7,7 +7,7 @@
     test("Instantiation", function () {
         var eventStack = giant.EventStack.create();
 
-        ok(eventStack.events.isA(giant.OpenChain), "should add events property");
+        ok(eventStack.events.isA($data.OpenChain), "should add events property");
     });
 
     test("Pushing event", function () {
@@ -25,7 +25,7 @@
 
         link = eventStack.pushEvent(event);
 
-        ok(link.isA(giant.ValueLink), "should return ValueLink instance");
+        ok(link.isA($data.ValueLink), "should return ValueLink instance");
         strictEqual(link.value, event, "should set event as link value");
     });
 

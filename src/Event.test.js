@@ -116,8 +116,8 @@
 
         event.setTargetPath('test>path'.toPath());
 
-        ok(event.originalPath.instanceOf(giant.Path), "should set a Path instance as originalPath");
-        ok(event.currentPath.instanceOf(giant.Path), "should set a Path instance as currentPath");
+        ok(event.originalPath.instanceOf($data.Path), "should set a Path instance as originalPath");
+        ok(event.currentPath.instanceOf($data.Path), "should set a Path instance as currentPath");
 
         notStrictEqual(event.originalPath, event.currentPath,
             "should set different Path instances for originalPath and currentPath");
@@ -234,7 +234,7 @@
 
         giant.EventSpace.addMocks({
             callHandlers: function (event) {
-                ok(event.currentPath.isA(giant.Query), "should call handlers with query");
+                ok(event.currentPath.isA($data.Query), "should call handlers with query");
                 equal(event.currentPath.toString(), 'test>|>path', "should set correct query contents");
             }
         });

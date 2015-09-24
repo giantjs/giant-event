@@ -16,8 +16,8 @@ $oop.postpone(giant, 'PathCollection', function () {
 
     /**
      * @class giant.PathCollection
-     * @extends giant.Collection
-     * @extends giant.Path
+     * @extends $data.Collection
+     * @extends $data.Path
      */
-    giant.PathCollection = giant.Collection.of(giant.Path);
+    giant.PathCollection = $data.Collection.of($data.Path);
 });
