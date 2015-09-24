@@ -1,5 +1,5 @@
 /*global giant */
-giant.postpone(giant, 'nextPayloadStore', function () {
+$oop.postpone(giant, 'nextPayloadStore', function () {
     "use strict";
 
     /**
@@ -9,7 +9,7 @@ giant.postpone(giant, 'nextPayloadStore', function () {
     giant.nextPayloadStore = giant.PayloadStore.create();
 });
 
-giant.postpone(giant, 'setNextPayloadItem', function () {
+$oop.postpone(giant, 'setNextPayloadItem', function () {
     "use strict";
 
     /**
@@ -24,7 +24,7 @@ giant.postpone(giant, 'setNextPayloadItem', function () {
     };
 });
 
-giant.postpone(giant, 'setNextPayloadItems', function () {
+$oop.postpone(giant, 'setNextPayloadItems', function () {
     "use strict";
 
     /**
@@ -37,7 +37,7 @@ giant.postpone(giant, 'setNextPayloadItems', function () {
     };
 });
 
-giant.postpone(giant, 'deleteNextPayloadItem', function () {
+$oop.postpone(giant, 'deleteNextPayloadItem', function () {
     "use strict";
 
     /**
@@ -50,7 +50,7 @@ giant.postpone(giant, 'deleteNextPayloadItem', function () {
     };
 });
 
-giant.postpone(giant, 'deleteNextPayloadItems', function () {
+$oop.postpone(giant, 'deleteNextPayloadItems', function () {
     "use strict";
 
     /**

@@ -1,8 +1,8 @@
 /*global giant */
-giant.postpone(giant, 'EventSpace', function () {
+$oop.postpone(giant, 'EventSpace', function () {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend();
 
     /**
@@ -15,7 +15,7 @@ giant.postpone(giant, 'EventSpace', function () {
     /**
      * Events traverse within a confined event space.
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      * @extends giant.EventSpawner
      * @extends giant.EventTarget
      */

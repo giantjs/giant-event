@@ -2,7 +2,7 @@
  * Interface that marks a class as a source of events, ie. triggering and broadcasting events.
  * @name giant.EventSource
  * @class
- * @extends giant.Base
+ * @extends $oop.Base
  */
 
 /**

@@ -1,8 +1,8 @@
 /*global giant */
-giant.postpone(giant, 'PayloadStore', function () {
+$oop.postpone(giant, 'PayloadStore', function () {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend();
 
     /**
@@ -14,7 +14,7 @@ giant.postpone(giant, 'PayloadStore', function () {
     /**
      * Stores event payload items indexed by event name and item name.
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      */
     giant.PayloadStore = self
         .addMethods(/** @lends giant.PayloadStore# */{

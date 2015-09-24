@@ -1,8 +1,8 @@
 /*global giant */
-giant.postpone(giant, 'Event', function () {
+$oop.postpone(giant, 'Event', function () {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend();
 
     /**
@@ -18,7 +18,7 @@ giant.postpone(giant, 'Event', function () {
      * An event is an object that may traverse in an event space.
      * Events carry all information regarding their position & properties.
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      * @extends giant.EventSource
      */
     giant.Event = self
@@ -187,7 +187,7 @@ giant.postpone(giant, 'Event', function () {
 
             /**
              * Retrieves event from chain of original events by type.
-             * @param {function|giant.Base} eventType
+             * @param {function|$oop.Base} eventType
              * @returns {giant.Event|*} Original event matching the specified type.
              */
             getOriginalEventByType: function (eventType) {
@@ -203,7 +203,7 @@ giant.postpone(giant, 'Event', function () {
                             that = that.originalEvent;
                         }
                     }
-                } else if (giant.Base.isBaseOf(eventType)) {
+                } else if ($oop.Base.isBaseOf(eventType)) {
                     while (that) {
                         if (eventType.isBaseOf(that)) {
                             result = that;

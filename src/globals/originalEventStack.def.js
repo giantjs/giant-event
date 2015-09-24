@@ -1,5 +1,5 @@
 /*global giant */
-giant.postpone(giant, 'originalEventStack', function () {
+$oop.postpone(giant, 'originalEventStack', function () {
     "use strict";
 
     /**
@@ -9,7 +9,7 @@ giant.postpone(giant, 'originalEventStack', function () {
     giant.originalEventStack = giant.EventStack.create();
 });
 
-giant.postpone(giant, 'pushOriginalEvent', function () {
+$oop.postpone(giant, 'pushOriginalEvent', function () {
     "use strict";
 
     /**

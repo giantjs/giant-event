@@ -2,7 +2,7 @@
  * Interface that marks a class as an event spawner. Event spawners create and prepare instances of giant.Event.
  * @name giant.EventSpawner
  * @class
- * @extends giant.Base
+ * @extends $oop.Base
  */
 
 /**

@@ -2,7 +2,7 @@
  * Interface that marks a class as target for events. Event targets may subscribe to events.
  * @name giant.EventTarget
  * @class
- * @extends giant.Base
+ * @extends $oop.Base
  */
 
 /**

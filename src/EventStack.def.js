@@ -1,8 +1,8 @@
 /*global giant */
-giant.postpone(giant, 'EventStack', function () {
+$oop.postpone(giant, 'EventStack', function () {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend();
 
     /**
@@ -15,7 +15,7 @@ giant.postpone(giant, 'EventStack', function () {
     /**
      * Stores events in a quasi-stack structure.
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      */
     giant.EventStack = self
         .addMethods(/** @lends giant.EventStack# */{

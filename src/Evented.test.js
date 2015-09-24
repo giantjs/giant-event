@@ -6,7 +6,7 @@
 
     var eventSpace = giant.EventSpace.create(),
 
-        EventedStaticClass = giant.Base.extend()
+        EventedStaticClass = $oop.Base.extend()
             .addTrait(giant.Evented)
             .setEventSpace(eventSpace)
             .setEventPath('test>path'.toPath())
@@ -17,7 +17,7 @@
                 }
             }),
 
-        EventedClass = giant.Base.extend()
+        EventedClass = $oop.Base.extend()
             .addTrait(giant.Evented)
             .addMethods({
                 init: function (path) {

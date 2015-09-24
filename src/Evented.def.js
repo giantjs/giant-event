@@ -1,8 +1,8 @@
 /*global giant */
-giant.postpone(giant, 'Evented', function () {
+$oop.postpone(giant, 'Evented', function () {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend();
 
     /**
@@ -10,7 +10,7 @@ giant.postpone(giant, 'Evented', function () {
      * Classes with this trait may trigger and capture
      * events on a specified event space directly.
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      * @extends giant.EventSpawner
      * @extends giant.EventSource
      * @extends giant.EventTarget

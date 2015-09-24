@@ -1,5 +1,5 @@
 /*global giant */
-giant.postpone(giant, 'PathCollection', function () {
+$oop.postpone(giant, 'PathCollection', function () {
     "use strict";
 
     /**
