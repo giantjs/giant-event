@@ -1,4 +1,3 @@
-/*global $event */
 $oop.postpone($event, 'nextPayloadStore', function () {
     "use strict";
 

@@ -1,4 +1,3 @@
-/*global $event */
 $oop.postpone($event, 'EventCollection', function () {
     "use strict";
 

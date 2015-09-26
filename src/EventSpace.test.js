@@ -1,4 +1,3 @@
-/*global $event, Q */
 (function () {
     "use strict";
 

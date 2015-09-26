@@ -1,4 +1,3 @@
-/*global $event */
 $oop.postpone($event, 'PathCollection', function () {
     "use strict";
 
