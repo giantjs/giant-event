@@ -34,7 +34,6 @@
     "karma-qunit": "^0.1.5",
     "phantomjs": "^1.9.18",
     "phantomjs-function-bind-polyfill": "git://github.com/dandean/phantomjs-function-bind-polyfill.git",
-    "q": "^1.4.0",
     "qunitjs": "^1.19.0"
   },
   "files": [
