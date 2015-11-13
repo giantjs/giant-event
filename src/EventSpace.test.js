@@ -394,13 +394,13 @@
         strictEqual(result, 1, "should return number of handlers run");
     });
 
-    asyncTest("Calling handler returning thenable", function () {
+    test("Calling handler returning thenable", function () {
         expect(3);
 
         var eventSpace = $event.EventSpace.create()
                 .subscribeTo('eventA', 'test>event'.toPath(), function () {
                     equal(trace++, 1, "should call handler second");
-                    var deferred = Q.defer();
+                    var deferred = $utils.Deferred.create();
                     deferred.resolve();
                     return deferred.promise;
                 }),
@@ -418,7 +418,6 @@
         link.addMocks({
             unlink: function () {
                 equal(trace, 2, "should unlink event last");
-                start();
             }
         });
 
